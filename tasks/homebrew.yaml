@@ -1,0 +1,37 @@
+- stat:
+    path: /home/linuxbrew
+  register: result
+
+- name: Assert that Homebrew is installed
+  ansible.builtin.assert:
+    fail_msg: |
+      Install Homebrew
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    that: result.stat.exists
+
+- name: Homebrew ~/.bashrc
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    mode: 0644
+    marker: >-
+      # {mark} ANSIBLE MANAGED BLOCK Homebrew
+    block: |
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+- name: Homebrew update and upgrade all
+  community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+
+- name: Homebrew install taps
+  community.general.homebrew_tap:
+    name: >-
+      {{ item }}
+  loop: >-
+    {{ homebrew_taps | default([]) }}
+
+- name: Homebrew install packages
+  community.general.homebrew:
+    name: >-
+      {{ homebrew }}
+    state: present

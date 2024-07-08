@@ -1,0 +1,70 @@
+git_config_personal_name: User
+git_config_personal_email: user@example.com
+
+git_config_work_name: User
+git_config_work_email: user@example.com
+
+apt_pkg:
+  # misc
+  - xz-utils
+  - unzip
+  - wget
+  - curl
+  - software-properties-common
+  - git
+  - cmake
+  - build-essential
+  - mc
+  - whois
+  - ipcalc
+  - bash-completion
+  - wslu
+  - bind9-dnsutils
+  - htop
+  - traceroute
+  - iputils-tracepath
+  - minicom
+  # dev
+  - azure-cli
+  # dotnet https://github.com/dotnet/core/blob/main/release-notes/8.0/linux-packages.md#ubuntu-2404-noble
+  - libc6
+  - libgcc-s1
+  - libicu74
+  - libssl3
+  - libstdc++6
+  - zlib1g
+  # resume
+  - texlive-full
+  - latexmk
+  - chktex
+
+install_docker: yes
+install_dotnet: yes
+
+homebrew_taps:
+  - azure/kubelogin
+  - fluxcd/tap
+  - hashicorp/tap
+
+homebrew:
+  - oh-my-posh
+  - kubectl
+  - kustomize
+  - Azure/kubelogin/kubelogin
+  - k9s
+  - helm
+  - cmctl
+  - fluxcd/tap/flux
+  - jq
+  - hashicorp/tap/packer
+  - yq
+
+bash_completions:
+  - oh-my-posh
+  - kubectl
+  - kubelogin
+  - kustomize
+  - helm
+  - flux
+  - k9s
+  - yq

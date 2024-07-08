@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  gather_subset: >-
+    !facter
+  vars_files:
+    - config.yaml
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: Sudo password
+      private: yes
+  tasks:
+    - name: Copy files/ to ~/
+      ansible.builtin.copy:
+        src: files/
+        dest: ~/
+
+    - ansible.builtin.import_tasks: tasks/package_sources.yaml
+      become: yes
+
+    - ansible.builtin.import_tasks: tasks/package.yaml
+      become: yes
+
+    - ansible.builtin.import_tasks: tasks/homebrew.yaml
+
+    - ansible.builtin.import_tasks: tasks/dotnet.yaml
+      when: install_dotnet
+
+    - ansible.builtin.import_tasks: tasks/docker.yaml
+      become: yes
+      when: install_docker
+
+    - ansible.builtin.import_tasks: tasks/bash.yaml
+
+    - ansible.builtin.import_tasks: tasks/git.yaml
+
+    - ansible.builtin.import_tasks: tasks/openssh.yaml
+
+    - ansible.builtin.import_tasks: tasks/ansible.yaml
+  

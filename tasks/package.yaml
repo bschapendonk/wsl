@@ -1,0 +1,12 @@
+---
+- name: apt upgrade
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: apt install
+  ansible.builtin.apt:
+    pkg: >-
+      {{ apt_pkg }}

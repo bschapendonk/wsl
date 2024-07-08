@@ -1,0 +1,16 @@
+---
+- name: Generate OpenSSH ED25519 key
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id_ed25519
+    comment: >-
+      {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
+    type: ed25519
+
+- name: Set SSH_SK_HELPER
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    mode: 0644
+    marker: >-
+      # {mark} ANSIBLE MANAGED BLOCK SSH_SK_HELPER
+    block: |
+      export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"

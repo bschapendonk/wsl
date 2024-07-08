@@ -1,0 +1,18 @@
+---
+- name: Create ~/.ansible.cfg
+  ansible.builtin.copy:
+    dest: ~/.ansible.cfg
+    content: |
+      [defaults]
+      callback_whitelist = profile_tasks,timer
+      stdout_callback = yaml
+      bin_ansible_callbacks = True
+
+- name: Install pip packages for Ansible
+  ansible.builtin.pip:
+    name:
+      - ansible
+      - ansible-navigator
+      - ansible-builder
+    state: latest
+    virtualenv: ~/.ansible

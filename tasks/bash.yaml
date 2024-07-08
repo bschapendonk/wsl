@@ -1,0 +1,57 @@
+---
+- ansible.builtin.file:
+    path: ~/.local/share/bash-completion/completions
+    state: directory
+    mode: 0755
+
+- name: Generate bash completions
+  ansible.builtin.shell: >-
+    {{ item }} completion bash > ~/.local/share/bash-completion/completions/{{ item }}
+  loop: >-
+    {{ bash_completions | default([]) }}
+
+- name: dotnet bash completions
+  ansible.builtin.copy:
+    content: |-
+      # bash parameter completion for the dotnet CLI
+
+      function _dotnet_bash_complete()
+      {
+        local cur="${COMP_WORDS[COMP_CWORD]}" IFS=$'\n' # On Windows you may need to use use IFS=$'\r\n'
+        local candidates
+
+        read -d '' -ra candidates < <(dotnet complete --position "${COMP_POINT}" "${COMP_LINE}" 2>/dev/null)
+
+        read -d '' -ra COMPREPLY < <(compgen -W "${candidates[*]:-}" -- "$cur")
+      }
+
+      complete -f -F _dotnet_bash_complete dotnet
+    dest: ~/.local/share/bash-completion/completions/dotnet
+  when: install_dotnet
+
+- name: Set EDITOR
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    mode: 0644
+    marker: >-
+      # {mark} ANSIBLE MANAGED BLOCK EDITOR
+    block: |
+      export EDITOR="code --new-window --wait"
+
+- name: Set KUBE_EDITOR
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    mode: 0644
+    marker: >-
+      # {mark} ANSIBLE MANAGED BLOCK KUBE_EDITOR
+    block: |
+      export KUBE_EDITOR="nano"
+
+- name: Add Oh My Posh to .bashrc
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    mode: 0644
+    marker: >-
+      # {mark} ANSIBLE MANAGED BLOCK Oh My Posh
+    block: |
+      eval "$(oh-my-posh init bash --config ~/.config/cloud-native-azure.omp.json)"

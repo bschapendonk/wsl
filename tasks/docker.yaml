@@ -1,0 +1,41 @@
+---
+- name: Enable systemd on WSL
+  ansible.builtin.copy:
+    dest: /etc/wsl.conf
+    mode: 0644
+    content: |
+      [boot]
+      systemd=true
+  register: result
+
+- name: Check if an WSL restart is needed
+  ansible.builtin.assert:
+    fail_msg: Chnaged /etc/wsl.conf, please restart WSL and rerun the playbook
+    that: not result.changed
+
+- name: Install Docker-CE
+  ansible.builtin.apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: Enable and start docker.service
+  ansible.builtin.systemd:
+    state: started
+    enabled: yes
+    name: docker.service
+
+- name: Enable and start containerd.service
+  ansible.builtin.systemd:
+    state: started
+    enabled: yes
+    name: containerd.service
+
+- ansible.builtin.user:
+    name: >-
+      {{ ansible_facts.env.USER }}
+    groups: docker
+    append: true
