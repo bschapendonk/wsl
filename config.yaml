@@ -74,10 +74,9 @@ k3s:
     host: k3s.local
 
 kc:
-  - pdc
+  - k8s
 
 az: yes
-az_tenant: 00000000-0000-0000-0000-000000000000
 az_subscriptions:
   - name: default
     subscription: 00000000-0000-0000-0000-000000000000
