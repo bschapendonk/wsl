@@ -1,0 +1,84 @@
+alias ansa='source ~/.ansible/bin/activate'
+
+if command -v code-insiders &> /dev/null
+then
+    alias code=code-insiders
+fi
+
+{% if az %} 
+cca() {
+    az login --output none
+}
+{% endif %}
+
+ccc() {
+{% if az %}
+    az account clear --output none
+    az logout --output none
+    kubelogin remove-tokens
+    kubelogin remove-tokens --token-cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
+{% endif %}
+{% if install_docker %}
+    docker logout all
+{% endif %}
+}
+
+cck() {
+{% for item in k3s | default([]) %}
+    ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
+    chmod 600 $HOME/.kube/{{ item.name | lower }}
+    yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
+    yq -i 'del(.clusters[].cluster.certificate-authority-data)' $HOME/.kube/{{ item.name | lower }}
+    yq -i '.clusters[].cluster.insecure-skip-tls-verify |= true' $HOME/.kube/{{ item.name | lower }}
+    yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+    yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+{% endfor %}
+
+{% if az %}
+    az login --output none
+
+{% for item in az_aks | default([]) %}
+    az account set --subscription {{ item.subscription }}
+
+    az aks get-credentials --resource-group {{ item.resource_group }} --name {{ item.name }} --file $HOME/.kube/{{ item.alias | lower }} --overwrite-existing
+    kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/{{ item.alias | lower }}
+{% endfor %}
+
+    az account clear --output none
+    az logout --output none
+{% endif %}
+}
+
+kcu() {
+    unset KUBECONFIG
+}
+
+{% for item in k3s | default([]) %}
+kc{{ item.name | lower }}() {
+    export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
+}
+{% endfor %}
+
+{% for item in az_aks | default([]) %}
+kc{{ item.alias | lower }}() {
+    export KUBECONFIG=$HOME/.kube/{{ item.alias | lower }}
+}
+{% endfor %}
+
+{% for item in kc | default([]) %}
+kc{{ item | lower }}() {
+    export KUBECONFIG=$HOME/.kube/{{ item | lower }}
+}
+{% endfor %}
+
+{% for item in az_subscriptions | default([]) %}
+az{{ item.name | lower }}() {
+    az account set --subscription {{ item.subscription }}
+}
+{% endfor %}
+
+{% for item in az_aks | default([]) %}
+az{{ item.alias | lower }}() {
+    az account set --subscription {{ item.subscription }}
+}
+{% endfor %}

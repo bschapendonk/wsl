@@ -1,4 +1,9 @@
 ---
+- name: Generate bash_aliases
+  ansible.builtin.template:
+    src: templates/.bash_aliases.j2
+    dest: ~/.bash_aliases
+
 - ansible.builtin.file:
     path: ~/.local/share/bash-completion/completions
     state: directory

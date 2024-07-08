@@ -68,3 +68,21 @@ bash_completions:
   - flux
   - k9s
   - yq
+
+k3s:
+  - name: k3s
+    host: k3s.local
+
+kc:
+  - pdc
+
+az: yes
+az_tenant: 00000000-0000-0000-0000-000000000000
+az_subscriptions:
+  - name: default
+    subscription: 00000000-0000-0000-0000-000000000000
+az_aks:
+  - alias: aks
+    name: aks
+    resource_group: rg-aks
+    subscription: 00000000-0000-0000-0000-000000000000
