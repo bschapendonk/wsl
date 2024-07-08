@@ -14,3 +14,8 @@
       # {mark} ANSIBLE MANAGED BLOCK SSH_SK_HELPER
     block: |
       export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
+
+- name: Generate .ssh/config
+  ansible.builtin.template:
+    src: templates/.ssh/config.j2
+    dest: ~/.ssh/config
