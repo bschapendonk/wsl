@@ -23,7 +23,7 @@ apt_pkg:
   - htop
   - traceroute
   - iputils-tracepath
-  - minicom
+  # - minicom
   # dev
   - azure-cli
   # dotnet https://github.com/dotnet/core/blob/main/release-notes/8.0/linux-packages.md#ubuntu-2404-noble
@@ -33,10 +33,10 @@ apt_pkg:
   - libssl3
   - libstdc++6
   - zlib1g
-  # resume
-  - texlive-full
-  - latexmk
-  - chktex
+  # tex
+  # - texlive-full
+  # - latexmk
+  # - chktex
 
 install_docker: yes
 install_dotnet: yes
