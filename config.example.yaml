@@ -97,3 +97,7 @@ ansible_venv:
   - ansible
   # - ansible-navigator
   # - ansible-builder
+
+git_clone:
+  - repo: https://github.com/bschapendonk/wsl.git
+    dest: ~/personal/wsl

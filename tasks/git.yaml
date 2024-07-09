@@ -71,3 +71,12 @@
     name: user.email
     value: >-
       {{ git_config_work_email }}
+
+- ansible.builtin.git:
+    repo: >-
+      {{ item.repo }}
+    dest: >-
+      {{ item.dest }}
+    update: no
+  loop: >-
+    {{ git_clone | default([]) }}
