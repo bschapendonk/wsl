@@ -8,6 +8,12 @@
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
+- name: Make sure ~/.local/bin exists
+  ansible.builtin.file:
+    path: ~/.local/bin
+    state: directory
+    mode: 0755
+
 - name: Download dotnet-install.sh
   ansible.builtin.get_url:
     url: https://dot.net/v1/dotnet-install.sh
