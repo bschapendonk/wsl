@@ -3,6 +3,7 @@
   ansible.builtin.template:
     src: templates/.bash_aliases.j2
     dest: ~/.bash_aliases
+    mode: 0640
 
 - ansible.builtin.file:
     path: ~/.local/share/bash-completion/completions
