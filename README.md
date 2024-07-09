@@ -6,6 +6,7 @@ Ansible playbook to setup my WSL
 * Only works on my machine!
 * Recent Windows 11 23H2 / 24/H2
 * WSL 2.2.4
+* U are using `bash`
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
   * Font eg. [CaskaydiaCove](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip)
@@ -13,6 +14,7 @@ Ansible playbook to setup my WSL
   * Git for Windows
   * Visual Studio Code
 * Your work is in `~/work` and personal stuff is in `~/personal`, `gitconfigs` for both are created with different username/email see `config.yaml`
+* You understand that `ansible` can't reload/source the `bash` session that's it's started from, so especially on first installs it might be needed to rerun the play and restart `bash`.
 
 ## Installation
 
