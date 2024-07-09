@@ -1,0 +1,21 @@
+{
+	"recommendations": [
+		"ms-vscode-remote.remote-wsl",
+		"ms-azure-devops.azure-pipelines",
+		"ms-azuretools.vscode-docker",
+		"ms-kubernetes-tools.vscode-kubernetes-tools",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"ms-vscode.PowerShell",
+		"HashiCorp.HCL",
+		"ms-azuretools.vscode-bicep",
+		"MS-vsliveshare.vsliveshare",
+		"ms-python.python",
+		"redhat.vscode-xml",
+		"redhat.vscode-yaml",
+		"donjayamanne.githistory",
+		"James-Yu.latex-workshop",
+		"devMike.mikrotik-routeros-script",
+		"samuelcolvin.jinjahtml",
+		"yzhang.markdown-all-in-one"
+	]
+}
