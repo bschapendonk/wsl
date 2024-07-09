@@ -5,14 +5,14 @@ then
     alias code=code-insiders
 fi
 
-{% if az %} 
+{% if az | default(false) %} 
 cca() {
     az login --output none
 }
 {% endif %}
 
 ccc() {
-{% if az %}
+{% if az | default(false) %}
     az account clear --output none
     az logout --output none
     kubelogin remove-tokens
@@ -34,7 +34,7 @@ cck() {
     yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
 
 {% endfor %}
-{% if az %}
+{% if az | default(false) %}
     az login --output none
 
 {% for item in az_aks | default([]) %}
