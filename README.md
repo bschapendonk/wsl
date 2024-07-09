@@ -68,9 +68,9 @@ pip3 install -U ansible
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`
 
-### 4. Run `playbook_wsl2.yaml`
+### 4. Run `playbook_wsl.yaml`
 ```bash
 # run as a normal user, the playbook will ask for the root password and elevate when needed!
 # probably needs to run twice the first time, with a shell reload in between
-ansible-playbook playbook_wsl2.yaml
+ansible-playbook playbook_wsl.yaml
 ```
