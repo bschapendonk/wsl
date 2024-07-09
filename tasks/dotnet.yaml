@@ -1,7 +1,7 @@
 - name: Set DOTNET
   ansible.builtin.blockinfile:
     path: ~/.bashrc
-    mode: 0644
+    mode: 0640
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK DOTNET
     block: |
@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: ~/.local/bin
     state: directory
-    mode: 0755
+    mode: 0750
 
 - name: Download dotnet-install.sh
   ansible.builtin.get_url:

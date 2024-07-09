@@ -9,7 +9,7 @@
 - name: Set SSH_SK_HELPER
   ansible.builtin.blockinfile:
     path: ~/.bashrc
-    mode: 0644
+    mode: 0640
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK SSH_SK_HELPER
     block: |

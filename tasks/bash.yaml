@@ -7,7 +7,7 @@
 - ansible.builtin.file:
     path: ~/.local/share/bash-completion/completions
     state: directory
-    mode: 0755
+    mode: 0750
 
 - name: Generate bash completions
   ansible.builtin.shell: >-
@@ -37,7 +37,7 @@
 - name: Set EDITOR
   ansible.builtin.blockinfile:
     path: ~/.bashrc
-    mode: 0644
+    mode: 0640
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK EDITOR
     block: |
@@ -46,7 +46,7 @@
 - name: Set KUBE_EDITOR
   ansible.builtin.blockinfile:
     path: ~/.bashrc
-    mode: 0644
+    mode: 0640
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK KUBE_EDITOR
     block: |
@@ -55,7 +55,7 @@
 - name: Add Oh My Posh to .bashrc
   ansible.builtin.blockinfile:
     path: ~/.bashrc
-    mode: 0644
+    mode: 0640
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK Oh My Posh
     block: |
