@@ -7,6 +7,7 @@
       callback_whitelist = profile_tasks,timer
       stdout_callback = yaml
       bin_ansible_callbacks = True
+    mode: 0640
 
 - name: Install pip packages for Ansible
   ansible.builtin.pip:

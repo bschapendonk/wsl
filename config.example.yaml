@@ -26,13 +26,6 @@ apt_pkg:
   # - minicom
   # dev
   - azure-cli
-  # dotnet https://github.com/dotnet/core/blob/main/release-notes/8.0/linux-packages.md#ubuntu-2404-noble
-  - libc6
-  - libgcc-s1
-  - libicu74
-  - libssl3
-  - libstdc++6
-  - zlib1g
   # tex
   # - texlive-full
   # - latexmk
