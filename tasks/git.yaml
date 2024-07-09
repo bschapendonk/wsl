@@ -72,7 +72,8 @@
     value: >-
       {{ git_config_work_email }}
 
-- ansible.builtin.git:
+- name: Clone repositories
+  ansible.builtin.git:
     repo: >-
       {{ item.repo }}
     dest: >-
