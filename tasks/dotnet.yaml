@@ -14,11 +14,13 @@
     dest: ~/.local/bin
     mode: u+x
 
-- name: Install dotnet lts
-  ansible.builtin.command: dotnet-install.sh --channel lts
-
-- name: Install dotnet preview
-  ansible.builtin.command: dotnet-install.sh --channel 9.0 --quality preview
+- name: Install dotnet
+  ansible.builtin.command: >-
+    dotnet-install.sh
+    --channel {{ item.channel | default('LTS') }}
+    --quality {{ item.quality | default('GA') }}
+  loop: >-
+    {{ dotnet }}
 
 - name: Install powershell
   ansible.builtin.command: dotnet tool update --global powershell

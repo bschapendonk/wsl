@@ -41,6 +41,9 @@ apt_pkg:
 install_docker: yes
 install_dotnet: yes
 
+dotnet:
+  - channel: lts
+
 homebrew_taps:
   - azure/kubelogin
   - fluxcd/tap
