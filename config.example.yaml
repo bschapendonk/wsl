@@ -95,3 +95,8 @@ az_aks:
     name: aks
     resource_group: rg-aks
     subscription: 00000000-0000-0000-0000-000000000000
+
+ansible_venv:
+  - ansible
+  - ansible-navigator
+  - ansible-builder

@@ -10,9 +10,7 @@
 
 - name: Install pip packages for Ansible
   ansible.builtin.pip:
-    name:
-      - ansible
-      - ansible-navigator
-      - ansible-builder
+    name: >-
+      {{ ansible_venv | default([]) }}
     state: latest
     virtualenv: ~/.ansible
