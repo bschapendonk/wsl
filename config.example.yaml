@@ -76,6 +76,13 @@ k3s:
 kc:
   - k8s
 
+ssh_hosts:
+  - host: test.example.com
+  - host: test2
+    hostname: test2.example.com
+    user: username
+    port: 99
+
 az: yes
 az_subscriptions:
   - name: default

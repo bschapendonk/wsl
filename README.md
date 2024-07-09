@@ -64,7 +64,7 @@ pip3 install --upgrade wheel
 pip3 install -U ansible
 ```
 
-### 3. Edit `config.yaml`
+### 3. Rename and edit `config.example.yaml` to `config.yaml`
 
 ### 4. Run `playbook_wsl2.yaml`
 ```bash
