@@ -39,6 +39,8 @@ apt_pkg:
   # - chktex
 
 install_docker: yes
+
+# dotnet also installs powershell as a dotnet tool
 install_dotnet: yes
 
 dotnet:
@@ -62,6 +64,7 @@ homebrew:
   - hashicorp/tap/packer
   - yq
 
+# if it works like "{{ item }} completion bash > ~/.local/share/bash-completion/completions/{{ item }}" add it here
 bash_completions:
   - oh-my-posh
   - kubectl
@@ -72,31 +75,32 @@ bash_completions:
   - k9s
   - yq
 
-k3s:
-  - name: k3s
-    host: k3s.local
+# All the k3s/kc/az stuff is mainly for .bash_aliases
+# k3s:
+#   - name: k3s
+#     host: k3s.local
 
-kc:
-  - k8s
+# kc:
+#   - k8s
 
-ssh_hosts:
-  - host: test.example.com
-  - host: test2
-    hostname: test2.example.com
-    user: username
-    port: 99
+# az: yes
+# az_subscriptions:
+#   - name: default
+#     subscription: 00000000-0000-0000-0000-000000000000
+# az_aks:
+#   - alias: aks
+#     name: aks
+#     resource_group: rg-aks
+#     subscription: 00000000-0000-0000-0000-000000000000
 
-az: yes
-az_subscriptions:
-  - name: default
-    subscription: 00000000-0000-0000-0000-000000000000
-az_aks:
-  - alias: aks
-    name: aks
-    resource_group: rg-aks
-    subscription: 00000000-0000-0000-0000-000000000000
+# ssh_hosts:
+#   - host: test.example.com
+#   - host: test2
+#     hostname: test2.example.com
+#     user: username
+#     port: 99
 
 ansible_venv:
   - ansible
-  - ansible-navigator
-  - ansible-builder
+  # - ansible-navigator
+  # - ansible-builder
