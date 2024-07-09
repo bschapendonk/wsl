@@ -2,10 +2,10 @@
 - name: Install Docker-CE
   ansible.builtin.apt:
     pkg:
-      - docker-ce
-      - docker-ce-cli
       - containerd.io
       - docker-buildx-plugin
+      - docker-ce
+      - docker-ce-cli
       - docker-compose-plugin
 
 - name: Enable and start docker.service

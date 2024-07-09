@@ -6,30 +6,29 @@ git_config_work_email: user@example.com
 
 apt_pkg:
   # misc
-  - xz-utils
+  - bash-completion
+  - bind9-dnsutils
+  - build-essential
+  - cmake
+  - curl
+  - git
+  - htop
+  - ipcalc
+  - iputils-tracepath
+  - mc
+  - software-properties-common
+  - traceroute
   - unzip
   - wget
-  - curl
-  - software-properties-common
-  - git
-  - cmake
-  - build-essential
-  - mc
   - whois
-  - ipcalc
-  - bash-completion
   - wslu
-  - bind9-dnsutils
-  - htop
-  - traceroute
-  - iputils-tracepath
-  # - minicom
+  - xz-utils
   # dev
   - azure-cli
   # tex
-  # - texlive-full
-  # - latexmk
   # - chktex
+  # - latexmk
+  # - texlive-full
 
 install_docker: yes
 
@@ -45,27 +44,27 @@ homebrew_taps:
   - hashicorp/tap
 
 homebrew:
-  - oh-my-posh
-  - kubectl
-  - kustomize
   - Azure/kubelogin/kubelogin
-  - k9s
-  - helm
   - cmctl
   - fluxcd/tap/flux
-  - jq
   - hashicorp/tap/packer
+  - helm
+  - jq
+  - k9s
+  - kubectl
+  - kustomize
+  - oh-my-posh
   - yq
 
 # if it works like "{{ item }} completion bash > ~/.local/share/bash-completion/completions/{{ item }}" add it here
 bash_completions:
-  - oh-my-posh
+  - flux
+  - helm
+  - k9s
   - kubectl
   - kubelogin
   - kustomize
-  - helm
-  - flux
-  - k9s
+  - oh-my-posh
   - yq
 
 # All the k3s/kc/az stuff is mainly for .bash_aliases
