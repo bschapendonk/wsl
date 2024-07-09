@@ -1,17 +1,17 @@
 ---
-- name: Enable systemd on WSL
-  ansible.builtin.copy:
-    dest: /etc/wsl.conf
-    mode: 0644
-    content: |
-      [boot]
-      systemd=true
-  register: result
+# - name: Enable systemd on WSL
+#   ansible.builtin.copy:
+#     dest: /etc/wsl.conf
+#     mode: 0644
+#     content: |
+#       [boot]
+#       systemd=true
+#   register: result
 
-- name: Check if an WSL restart is needed
-  ansible.builtin.assert:
-    fail_msg: Chnaged /etc/wsl.conf, please restart WSL and rerun the playbook
-    that: not result.changed
+# - name: Check if an WSL restart is needed
+#   ansible.builtin.assert:
+#     fail_msg: Chnaged /etc/wsl.conf, please restart WSL and rerun the playbook
+#     that: not result.changed
 
 - name: Install Docker-CE
   ansible.builtin.apt:
