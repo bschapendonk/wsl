@@ -59,4 +59,4 @@
     marker: >-
       # {mark} ANSIBLE MANAGED BLOCK Oh My Posh
     block: |
-      eval "$(oh-my-posh init bash --config ~/.config/cloud-native-azure.omp.json)"
+      eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
