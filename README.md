@@ -52,6 +52,7 @@ sudo apt -y install git python3-pip python3-dev python3-venv sshpass wget ca-cer
 # install homebrew and activate it for the current shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew completions link
 
 # Add git-credential-manager
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"

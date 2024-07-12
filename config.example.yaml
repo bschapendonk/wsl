@@ -56,16 +56,9 @@ homebrew:
   - oh-my-posh
   - yq
 
-# if it works like "{{ item }} completion bash > ~/.local/share/bash-completion/completions/{{ item }}" add it here
 bash_completions:
-  - flux
-  - helm
-  - k9s
-  - kubectl
   - kubelogin
-  - kustomize
   - oh-my-posh
-  - yq
 
 # All the k3s/kc/az stuff is mainly for .bash_aliases
 # k3s:

@@ -17,6 +17,16 @@
       # {mark} ANSIBLE MANAGED BLOCK Homebrew
     block: |
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      
+      if [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]]
+      then
+        source "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
+      else
+        for COMPLETION in "/home/linuxbrew/.linuxbrew/etc/bash_completion.d/"*
+        do
+          [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+        done
+      fi
 
 - name: Homebrew update and upgrade all
   community.general.homebrew:
