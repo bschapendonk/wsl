@@ -1,4 +1,4 @@
-- stat:
+- ansible.builtin.stat:
     path: /home/linuxbrew
   register: result
 
@@ -9,6 +9,15 @@
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     that: result.stat.exists
 
+- name: brew completions state
+  ansible.builtin.command: brew completions state
+  changed_when: false
+  register: result
+
+- name: brew completions link
+  ansible.builtin.command: brew completions link
+  when: result.stdout != "Completions are linked."
+
 - name: Homebrew ~/.bashrc
   ansible.builtin.blockinfile:
     path: ~/.bashrc
@@ -17,7 +26,7 @@
       # {mark} ANSIBLE MANAGED BLOCK Homebrew
     block: |
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      
+
       if [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]]
       then
         source "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
