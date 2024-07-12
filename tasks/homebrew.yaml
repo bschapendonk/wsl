@@ -9,15 +9,6 @@
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     that: result.stat.exists
 
-- name: brew completions state
-  ansible.builtin.command: brew completions state
-  changed_when: false
-  register: result
-
-- name: brew completions link
-  ansible.builtin.command: brew completions link
-  when: result.stdout != "Completions are linked."
-
 - name: Homebrew ~/.bashrc
   ansible.builtin.blockinfile:
     path: ~/.bashrc
@@ -27,11 +18,11 @@
     block: |
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-      if [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]]
+      if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
       then
-        source "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
+        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
       else
-        for COMPLETION in "/home/linuxbrew/.linuxbrew/etc/bash_completion.d/"*
+        for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
         do
           [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
         done
@@ -54,3 +45,12 @@
     name: >-
       {{ homebrew }}
     state: present
+
+- name: Homebrew completions state
+  ansible.builtin.command: brew completions state
+  changed_when: false
+  register: result
+
+- name: Homebrew completions link
+  ansible.builtin.command: brew completions link
+  when: result.stdout != "Completions are linked."
