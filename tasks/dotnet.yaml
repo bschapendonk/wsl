@@ -36,7 +36,7 @@
     --channel {{ item.channel | default('LTS') }}
     --quality {{ item.quality | default('GA') }}
   loop: >-
-    {{ dotnet }}
+    {{ dotnet | default([]) }}
 
 - name: Install powershell
   ansible.builtin.command: dotnet tool update --global powershell

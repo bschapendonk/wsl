@@ -47,7 +47,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 # install minimal required packages
-sudo apt -y install git python3-pip python3-dev python3-venv sshpass wget ca-certificates
+sudo apt -y install git python3-pip python3-dev python3-venv pipx sshpass wget ca-certificates
 
 # install homebrew and activate it for the current shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -57,15 +57,7 @@ brew completions link
 # Add git-credential-manager
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
 
-# Create VENV for ansible under `.ansible`
-python3 -m venv .ansible
-
-# Activate VENV
-source ~/.ansible/bin/activate
-
-# install ansible
-pip3 install --upgrade wheel
-pip3 install -U ansible
+pipx install --include-deps ansible
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`

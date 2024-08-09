@@ -15,6 +15,7 @@ apt_pkg:
   - htop
   - ipcalc
   - iputils-tracepath
+  - pipx
   - mc
   - software-properties-common
   - traceroute
@@ -60,6 +61,11 @@ bash_completions:
   - kubelogin
   - oh-my-posh
 
+pipx:
+  - name: ansible
+    deps: yes
+  - name: ansible-builder
+
 # All the k3s/kc/az stuff is mainly for .bash_aliases
 # k3s:
 #   - name: k3s
@@ -84,11 +90,6 @@ bash_completions:
 #     hostname: test2.example.com
 #     user: username
 #     port: 99
-
-ansible_venv:
-  - ansible
-  # - ansible-navigator
-  # - ansible-builder
 
 git_clone:
   - repo: https://github.com/bschapendonk/wsl.git
