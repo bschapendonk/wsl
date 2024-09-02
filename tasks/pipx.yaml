@@ -6,6 +6,15 @@
     install_deps: >-
       {{ item.deps | default(false) }}
     include_injected: yes
+    executable: /usr/bin/pipx
+  loop: >-
+    {{ pipx | default([]) }}
+
+- name: pipx inject
+  community.general.pipx:
+    name: >-
+      {{ item.name }}
+    state: inject
     inject_packages: >-
       {{ item.inject | default([]) }}
     executable: /usr/bin/pipx
