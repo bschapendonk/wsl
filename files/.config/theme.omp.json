@@ -120,6 +120,8 @@
           "background": "#ebcc34",
           "background_templates": [
             "{{ if .Context | contains \"prd\" }}#C70039{{end}}",
+            "{{ if .Context | contains \"k8scloud\" }}#C70039{{end}}",
+            "{{ if .Context | contains \"k8sdvb\" }}#C70039{{end}}",
             "{{ if .Context | contains \"dev\" }}#FFC300{{end}}"
           ],
           "foreground": "#000000",
