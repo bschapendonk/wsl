@@ -1,4 +1,8 @@
 ---
+- name: Add Git stable releases stable repository from PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:git-core/ppa
+
 - name: Add signing key https://packages.microsoft.com/keys/microsoft.asc
   ansible.builtin.apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
