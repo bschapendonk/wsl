@@ -11,6 +11,13 @@
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: ed25519
 
+- name: Generate OpenSSH RSA key
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id_rsa
+    comment: >-
+      {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
+    type: rsa
+
 - name: Set SSH_SK_HELPER
   ansible.builtin.blockinfile:
     path: ~/.bashrc

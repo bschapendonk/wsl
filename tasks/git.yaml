@@ -79,6 +79,7 @@
     dest: >-
       {{ item.dest }}
     update: no
+    accept_newhostkey: yes
   loop: >-
     {{ git_clone | default([]) }}
   tags:
