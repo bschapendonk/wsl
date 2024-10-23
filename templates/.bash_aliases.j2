@@ -15,10 +15,9 @@ cca() {
 
 ccc() {
 {% if az | default(false) %}
-    az account clear --output none
     az logout --output none
-    kubelogin remove-tokens
-    kubelogin remove-tokens --token-cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
+    az-kubelogin remove-tokens
+    az-kubelogin remove-tokens --token-cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
 {% endif %}
 {% if install_docker %}
     docker logout all
@@ -42,10 +41,9 @@ cck() {
 {% for item in az_aks | default([]) %}
     az account set --subscription {{ item.subscription }}
     az aks get-credentials --resource-group {{ item.resource_group }} --name {{ item.name }} --file $HOME/.kube/{{ item.alias | lower }} --overwrite-existing
-    kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/{{ item.alias | lower }}
-
+    az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/{{ item.alias | lower }}
+    yq -i '.users[].user.exec.command |= "az-kubelogin"' $HOME/.kube/{{ item.alias | lower }}
 {% endfor %}
-    az account clear --output none
     az logout --output none
 {% endif %}
 }
