@@ -12,7 +12,7 @@ plugins:
     confirm: true
     args:
       - -c
-      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:latest --share-processes -- bash"
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:latest --share-processes -- bash"
   dive:
     shortCut: d
     confirm: false
@@ -23,9 +23,9 @@ plugins:
     background: false
     args:
       - $COL-IMAGE
-# move selected line to chosen resource in K9s, then:
-# Shift-T (with confirmation) to toggle helm releases or kustomizations suspend and resume
-# Shift-R (no confirmation) to reconcile a git source or a helm release or a kustomization
+  # move selected line to chosen resource in K9s, then:
+  # Shift-T (with confirmation) to toggle helm releases or kustomizations suspend and resume
+  # Shift-R (no confirmation) to reconcile a git source or a helm release or a kustomization
   toggle-helmrelease:
     shortCut: Shift-T
     confirm: true
@@ -174,25 +174,25 @@ plugins:
         --context $CONTEXT
         -n $NAMESPACE $NAME
         | less -K
-  # trace:
-  #   shortCut: Shift-A
-  #   confirm: false
-  #   description: Flux trace
-  #   scopes:
-  #     - all
-  #   command: bash
-  #   background: false
-  #   args:
-  #     - -c
-  #     - >-
-  #       resource=$(echo $RESOURCE_NAME | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s|es)$//g')
-  #       flux
-  #       trace
-  #       --context $CONTEXT
-  #       --kind $resource
-  #       --api-version $RESOURCE_GROUP/$RESOURCE_VERSION
-  #       --namespace $NAMESPACE $NAME
-  #       | less -K
+  trace:
+    shortCut: Shift-P
+    confirm: false
+    description: Flux trace
+    scopes:
+      - all
+    command: bash
+    background: false
+    args:
+      - -c
+      - >-
+        resource=$(echo $RESOURCE_NAME | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s|es)$//g')
+        flux
+        trace
+        --context $CONTEXT
+        --kind $resource
+        --api-version $RESOURCE_GROUP/$RESOURCE_VERSION
+        --namespace $NAMESPACE $NAME
+        | less -K
   # credits: https://github.com/fluxcd/flux2/discussions/2494
   get-suspended-helmreleases:
     shortCut: Shift-S
@@ -228,15 +228,15 @@ plugins:
         kustomizations.kustomize.toolkit.fluxcd.io -o json
         | jq -r '.items[] | select(.spec.suspend==true) | [.metadata.name,.spec.suspend] | @tsv'
         | less -K
-# Removes all finalizers from the selected resource. Finalizers are namespaced keys that tell Kubernetes to wait
-# until specific conditions are met before it fully deletes resources marked for deletion.
-# Before deleting an object you need to ensure that all finalizers has been removed. Usually this would be done
-# by the specific controller but under some circumstances it is possible to encounter a set of objects blocked
-# for deletion.
-# This plugins makes this task easier by providing a shortcut to directly removing them all.
-# Be careful when using this plugin as it may leave dangling resources or instantly deleting resources that were
-# blocked by the finalizers.
-# Author: github.com/jalvarezit
+  # Removes all finalizers from the selected resource. Finalizers are namespaced keys that tell Kubernetes to wait
+  # until specific conditions are met before it fully deletes resources marked for deletion.
+  # Before deleting an object you need to ensure that all finalizers has been removed. Usually this would be done
+  # by the specific controller but under some circumstances it is possible to encounter a set of objects blocked
+  # for deletion.
+  # This plugins makes this task easier by providing a shortcut to directly removing them all.
+  # Be careful when using this plugin as it may leave dangling resources or instantly deleting resources that were
+  # blocked by the finalizers.
+  # Author: github.com/jalvarezit
   remove_finalizers:
     shortCut: Ctrl-F
     confirm: true
@@ -261,7 +261,7 @@ plugins:
       - --type
       - merge
   # Inspect certificate chains with openssl.
-# See: https://github.com/openssl/openssl.
+  # See: https://github.com/openssl/openssl.
   secret-openssl-ca:
     shortCut: Ctrl-O
     confirm: false
