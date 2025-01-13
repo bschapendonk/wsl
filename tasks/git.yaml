@@ -78,7 +78,7 @@
       {{ item.repo }}
     dest: >-
       {{ item.dest }}
-    update: no
+    update: false
     accept_newhostkey: yes
   loop: >-
     {{ git_clone | default([]) }}

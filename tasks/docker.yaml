@@ -11,13 +11,13 @@
 - name: Enable and start docker.service
   ansible.builtin.systemd:
     state: started
-    enabled: yes
+    enabled: true
     name: docker.service
 
 - name: Enable and start containerd.service
   ansible.builtin.systemd:
     state: started
-    enabled: yes
+    enabled: true
     name: containerd.service
 
 - ansible.builtin.user:

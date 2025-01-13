@@ -5,7 +5,7 @@
   vars_prompt:
     - name: ansible_become_pass
       prompt: Sudo password
-      private: yes
+      private: true
   tasks:
     - name: Copy files/ to ~/
       ansible.builtin.copy:
@@ -13,10 +13,10 @@
         dest: ~/
 
     - ansible.builtin.import_tasks: tasks/package_sources.yaml
-      become: yes
+      become: true
 
     - ansible.builtin.import_tasks: tasks/package.yaml
-      become: yes
+      become: true
 
     - ansible.builtin.import_tasks: tasks/homebrew.yaml
 
@@ -24,7 +24,7 @@
       when: install_dotnet
 
     - ansible.builtin.import_tasks: tasks/docker.yaml
-      become: yes
+      become: true
       when: install_docker
 
     - ansible.builtin.import_tasks: tasks/bash.yaml

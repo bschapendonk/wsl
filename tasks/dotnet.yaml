@@ -7,7 +7,7 @@
       - libssl3
       - libstdc++6
       - zlib1g
-  become: yes
+  become: true
 
 - name: Set DOTNET
   ansible.builtin.blockinfile:
