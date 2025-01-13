@@ -1,7 +1,5 @@
 ---
 - hosts: localhost
-  gather_subset: >-
-    !facter
   vars_files:
     - config.yaml
   vars_prompt:
