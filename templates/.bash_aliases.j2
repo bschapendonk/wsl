@@ -29,8 +29,6 @@ cck() {
     ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
     chmod 600 $HOME/.kube/{{ item.name | lower }}
     yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
-    yq -i 'del(.clusters[].cluster.certificate-authority-data)' $HOME/.kube/{{ item.name | lower }}
-    yq -i '.clusters[].cluster.insecure-skip-tls-verify |= true' $HOME/.kube/{{ item.name | lower }}
     yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
     yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
 
