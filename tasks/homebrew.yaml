@@ -40,11 +40,11 @@
   loop: >-
     {{ homebrew_taps | default([]) }}
 
-# - name: Homebrew install packages
-#   community.general.homebrew:
-#     name: >-
-#       {{ homebrew | default([]) }}
-#     state: present
+- name: Homebrew install packages
+  community.general.homebrew:
+    name: >-
+      {{ homebrew | default([]) }}
+    state: present
 
 - name: Homebrew completions state
   ansible.builtin.command: brew completions state
