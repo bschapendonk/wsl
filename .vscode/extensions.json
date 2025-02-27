@@ -1,7 +1,5 @@
 {
 	"recommendations": [
-		"devMike.mikrotik-routeros-script",
-		"donjayamanne.githistory",
 		"HashiCorp.HCL",
 		"James-Yu.latex-workshop",
 		"ms-azure-devops.azure-pipelines",
@@ -11,11 +9,8 @@
 		"ms-python.python",
 		"ms-vscode-remote.remote-wsl",
 		"ms-vscode.PowerShell",
-		"MS-vsliveshare.vsliveshare",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
-		"samuelcolvin.jinjahtml",
-		"VisualStudioExptTeam.vscodeintellicode",
-		"yzhang.markdown-all-in-one"
+		"VisualStudioExptTeam.vscodeintellicode"
 	]
 }
