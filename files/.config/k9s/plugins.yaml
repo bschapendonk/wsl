@@ -12,7 +12,7 @@ plugins:
     confirm: true
     args:
       - -c
-      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu:latest --share-processes -- bash"
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ghcr.io/bschapendonk/hexapuma-diagnostics:main --share-processes -- bash"
   # Manage cert-manager Certificate resources via cmctl.
   # See: https://github.com/cert-manager/cmctl
   cert-status:
@@ -301,7 +301,7 @@ plugins:
           }
         }
         '
-        kubectl run -ti --image ubuntu:latest --rm --privileged --restart=Never --overrides="$json" root --command -- nsenter -t 1 -m -u -n -i -- bash -l
+        kubectl run -ti --image ghcr.io/bschapendonk/hexapuma-diagnostics:main --rm --privileged --restart=Never --overrides="$json" root --command -- nsenter -t 1 -m -u -n -i -- bash -l
   # Inspect certificate chains with openssl.
   # See: https://github.com/openssl/openssl.
   secret-openssl-ca:
