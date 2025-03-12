@@ -12,17 +12,43 @@ plugins:
     confirm: true
     args:
       - -c
-      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:latest --share-processes -- bash"
-  dive:
-    shortCut: d
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu:latest --share-processes -- bash"
+  # Manage cert-manager Certificate resources via cmctl.
+  # See: https://github.com/cert-manager/cmctl
+  cert-status:
+    shortCut: Shift-S
     confirm: false
-    description: "Dive image"
+    description: Certificate status
     scopes:
-      - containers
-    command: dive
+      - certificates
+    command: bash
     background: false
     args:
-      - $COL-IMAGE
+      - -c
+      - "cmctl status certificate --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  cert-renew:
+    shortCut: Shift-R
+    confirm: false
+    description: Certificate renew
+    scopes:
+      - certificates
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl renew --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  secret-inspect:
+    shortCut: Shift-I
+    confirm: false
+    description: Inspect secret
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl inspect secret --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  # $HOME/.k9s/plugin.yml
   # move selected line to chosen resource in K9s, then:
   # Shift-T (with confirmation) to toggle helm releases or kustomizations suspend and resume
   # Shift-R (no confirmation) to reconcile a git source or a helm release or a kustomization
@@ -174,25 +200,6 @@ plugins:
         --context $CONTEXT
         -n $NAMESPACE $NAME
         | less -K
-  # trace:
-  #   shortCut: Shift-P
-  #   confirm: false
-  #   description: Flux trace
-  #   scopes:
-  #     - all
-  #   command: bash
-  #   background: false
-  #   args:
-  #     - -c
-  #     - >-
-  #       resource=$(echo $RESOURCE_NAME | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s|es)$//g')
-  #       flux
-  #       trace
-  #       --context $CONTEXT
-  #       --kind $resource
-  #       --api-version $RESOURCE_GROUP/$RESOURCE_VERSION
-  #       --namespace $NAMESPACE $NAME
-  #       | less -K
   # credits: https://github.com/fluxcd/flux2/discussions/2494
   get-suspended-helmreleases:
     shortCut: Shift-S
@@ -228,38 +235,73 @@ plugins:
         kustomizations.kustomize.toolkit.fluxcd.io -o json
         | jq -r '.items[] | select(.spec.suspend==true) | [.metadata.name,.spec.suspend] | @tsv'
         | less -K
-  # Removes all finalizers from the selected resource. Finalizers are namespaced keys that tell Kubernetes to wait
-  # until specific conditions are met before it fully deletes resources marked for deletion.
-  # Before deleting an object you need to ensure that all finalizers has been removed. Usually this would be done
-  # by the specific controller but under some circumstances it is possible to encounter a set of objects blocked
-  # for deletion.
-  # This plugins makes this task easier by providing a shortcut to directly removing them all.
-  # Be careful when using this plugin as it may leave dangling resources or instantly deleting resources that were
-  # blocked by the finalizers.
-  # Author: github.com/jalvarezit
-  remove_finalizers:
-    shortCut: Ctrl-F
+  # Suspends/Resumes a cronjob
+  toggleCronjob:
+    shortCut: Ctrl-S
     confirm: true
     dangerous: true
     scopes:
-      - all
-    description: |
-      Removes all finalizers from selected resource. Be careful when using it,
-      it may leave dangling resources or delete them
+      - cj
+    description: Toggle to suspend or resume a running cronjob
     command: kubectl
     background: true
     args:
       - patch
+      - cronjobs
+      - $NAME
+      - -n
+      - $NAMESPACE
       - --context
       - $CONTEXT
-      - --namespace
-      - $NAMESPACE
-      - $RESOURCE_NAME
-      - $NAME
       - -p
-      - '{"metadata":{"finalizers":null}}'
-      - --type
-      - merge
+      - '{"spec" : {"suspend" : $!COL-SUSPEND }}'
+  # Sends logs over to jq for processing. This leverages kubectl plugin kubectl-jq.
+  jqlogs:
+    shortCut: Ctrl-J
+    confirm: false
+    description: "Logs (jq)"
+    scopes:
+      - po
+    command: kubectl
+    background: false
+    args:
+      - jq
+      - $NAME
+      - $NAMESPACE
+      - $CONTEXT
+  node-root-shell:
+    shortCut: a
+    description: Run root shell on node
+    dangerous: true
+    scopes:
+      - nodes
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - |
+        host="$1"
+        json='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "hostIPC": true,
+            "hostNetwork": true,
+            "hostPID": true
+        '
+        if ! [[ -z "$host" ]]; then
+          json+=",
+          \"nodeSelector\" : {
+            \"kubernetes.io/hostname\" : \"$host\"
+          }
+          ";
+        fi
+        json+='
+          }
+        }
+        '
+        kubectl run -ti --image ubuntu:latest --rm --privileged --restart=Never --overrides="$json" root --command -- nsenter -t 1 -m -u -n -i -- bash -l
   # Inspect certificate chains with openssl.
   # See: https://github.com/openssl/openssl.
   secret-openssl-ca:
@@ -284,3 +326,16 @@ plugins:
     args:
       - -c
       - kubectl get secret --context $CONTEXT -n $NAMESPACE $NAME -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl storeutl -noout -text -certs /dev/stdin |& less
+  # remove finalizers from a stuck namespace
+  rm-ns:
+    shortCut: n
+    confirm: true
+    dangerous: true
+    description: Remove NS Finalizers
+    scopes:
+      - namespace
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get namespace $NAME -o json | jq '.spec.finalizers=[]' | kubectl replace --raw /api/v1/namespaces/$NAME/finalize -f - > /dev/null"
