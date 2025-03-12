@@ -1,7 +1,13 @@
 ---
-- name: Add Git stable releases stable repository from PPA
+- name: Add signing key https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
+  ansible.builtin.apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf911ab184317630c59970973e363c90f8f1b6217
+    keyring: /etc/apt/trusted.gpg.d/ppa_git_core_ppa_noble.gpg
+
+- name: Add https://ppa.launchpadcontent.net/git-core/ppa/ubuntu  repository into sources list
   ansible.builtin.apt_repository:
-    repo: ppa:git-core/ppa
+    repo: deb [arch=amd64] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu noble main
+    filename: ppa_git_core_ppa_noble
 
 - name: Add signing key https://packages.microsoft.com/keys/microsoft.asc
   ansible.builtin.apt_key:
