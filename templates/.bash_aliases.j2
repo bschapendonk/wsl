@@ -16,8 +16,8 @@ cca() {
 ccc() {
 {% if az | default(false) %}
     az logout --output none
-    az-kubelogin remove-tokens
-    az-kubelogin remove-tokens --token-cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
+    az-kubelogin remove-cache-dir
+    az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
 {% endif %}
 {% if install_docker %}
     docker logout all
