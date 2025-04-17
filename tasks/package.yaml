@@ -1,12 +1,14 @@
 ---
-- name: apt upgrade
-  ansible.builtin.apt:
-    update_cache: true
-    upgrade: true
-    autoclean: true
+- name: dnf update --refresh
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
     autoremove: true
+    best: true
+    update_cache: true
 
-- name: apt install
-  ansible.builtin.apt:
-    pkg: >-
-      {{ apt_pkg }}
+- name: dnf install
+  ansible.builtin.dnf:
+    name: >-
+      {{ dnf_pkg }}
+    best: true

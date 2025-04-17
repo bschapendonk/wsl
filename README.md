@@ -71,7 +71,7 @@ ansible-playbook playbook_wsl.yaml
 
 ```bash
 sudo dnf update --refresh
-sudo dnf install git pipx
+sudo dnf install git python3-libdnf5 pipx
 
 # Add git-credential-manager
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
