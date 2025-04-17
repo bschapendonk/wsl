@@ -21,23 +21,12 @@ Ansible playbook to setup my WSL
 
 ### 1. Install WSL
 ```shell
-# install wsl and ubuntu
-wsl --install Ubuntu-24.04
+# install wsl and Fedora
+wsl --install FedoraLinux-42
 
 # after the installation / reboots, shut wsl down and update it to the latest version
 wsl --shutdown
 wsl --update
-```
-
-```shell
-# %USERPROFILE%\.wslconfig
-[wsl2]
-networkingMode=mirrored
-dnsTunneling=true
-
-[experimental]
-autoMemoryReclaim=dropcache
-sparseVhd=true
 ```
 
 ### 2. Prepare base WSL
