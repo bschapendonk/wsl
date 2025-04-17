@@ -68,3 +68,23 @@ pipx install --include-deps ansible
 # probably needs to run twice the first time, with a shell reload in between
 ansible-playbook playbook_wsl.yaml
 ```
+
+```bash
+sudo dnf update --refresh
+sudo dnf install git python3-libdnf5 pipx
+
+# Add git-credential-manager
+git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+
+# install homebrew and activate it for the current shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew completions link
+
+# exports
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+pipx install --include-deps ansible
+
+```
