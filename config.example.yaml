@@ -4,36 +4,23 @@ git_config_personal_email: user@example.com
 git_config_work_name: User
 git_config_work_email: user@example.com
 
-apt_pkg:
+dnf_pkg:
   # misc
-  - bash-completion
-  - bind9-dnsutils
-  - build-essential
-  - cmake
-  - curl
   - git
+  - golang
   - htop
   - ipcalc
-  - iputils-tracepath
+  - python3-libdnf5
   - pipx
-  - mc
-  - software-properties-common
-  - traceroute
-  - unzip
   - wget
-  - whois
-  - wslu
-  - xz-utils
+  # groups
+  - "@development-tools"
   # dev
   - azure-cli
-  # tex
-  # - chktex
-  # - latexmk
-  # - texlive-full
+  - podman
+  # resume
+  - texlive-scheme-full
 
-install_docker: yes
-
-# dotnet also installs powershell as a dotnet tool
 install_dotnet: yes
 
 dotnet:
@@ -41,30 +28,32 @@ dotnet:
 
 homebrew_taps:
   - azure/kubelogin
+  - derailed/k9s
   - fluxcd/tap
   - hashicorp/tap
+  - int128/kubelogin
 
 homebrew:
-  - Azure/kubelogin/kubelogin
+  - azure/kubelogin/az-kubelogin
   - cmctl
+  - derailed/k9s/k9s
   - fluxcd/tap/flux
   - hashicorp/tap/packer
   - helm
-  - jq
-  - k9s
+  - hugo
+  - int128/kubelogin/kubelogin
   - kubectl
   - kustomize
+  - kyverno
   - oh-my-posh
-  - yq
-
-bash_completions:
-  - kubelogin
-  - oh-my-posh
+  - step
 
 pipx:
   - name: ansible
     deps: yes
   - name: ansible-builder
+    inject:
+      - argcomplete
 
 # All the k3s/kc/az stuff is mainly for .bash_aliases
 # k3s:
@@ -81,8 +70,6 @@ pipx:
 # az_aks:
 #   - alias: aks
 #     name: aks
-#     resource_group: rg-aks
-#     subscription: 00000000-0000-0000-0000-000000000000
 
 # ssh_hosts:
 #   - host: test.example.com
@@ -90,7 +77,6 @@ pipx:
 #     hostname: test2.example.com
 #     user: username
 #     port: 99
-
 git_clone:
   - repo: https://github.com/bschapendonk/wsl.git
-    dest: ~/personal/wsl
+    dest: ~/personal/wsl    
