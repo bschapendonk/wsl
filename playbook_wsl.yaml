@@ -23,7 +23,7 @@
     - ansible.builtin.import_tasks: tasks/dotnet.yaml
       when: install_dotnet
 
-    # - ansible.builtin.import_tasks: tasks/bash.yaml
+    - ansible.builtin.import_tasks: tasks/bash.yaml
 
     # - ansible.builtin.import_tasks: tasks/git.yaml
 

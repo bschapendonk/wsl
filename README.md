@@ -81,6 +81,10 @@ git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew completions link
 
+# exports
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
 pipx install --include-deps ansible
 
 ```
