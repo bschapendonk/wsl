@@ -1,36 +1,4 @@
 ---
-- name: Add signing key https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
-  ansible.builtin.apt_key:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf911ab184317630c59970973e363c90f8f1b6217
-    keyring: /etc/apt/trusted.gpg.d/ppa_git_core_ppa_noble.gpg
-
-- name: Add https://ppa.launchpadcontent.net/git-core/ppa/ubuntu  repository into sources list
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu noble main
-    filename: ppa_git_core_ppa_noble
-
-- name: Add signing key https://packages.microsoft.com/keys/microsoft.asc
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
-
-- name: Add list microsoft-prod
-  ansible.builtin.apt:
-    deb: https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
-
-- name: Add https://packages.microsoft.com/repos/azure-cli/ repository into sources list
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ noble main
-    filename: azure-cli
-
-- name: Add signing key https://download.docker.com/linux/ubuntu/gpg
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /etc/apt/trusted.gpg.d/docker.gpg
-  when: install_docker
-
-- name: Add https://download.docker.com/linux/ubuntu repository into sources list
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu noble stable
-    filename: docker
-  when: install_docker
+- name: Install https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
+  ansible.builtin.dnf:
+    name: https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm

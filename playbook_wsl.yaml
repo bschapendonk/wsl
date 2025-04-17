@@ -15,25 +15,25 @@
     - ansible.builtin.import_tasks: tasks/package_sources.yaml
       become: true
 
-    - ansible.builtin.import_tasks: tasks/package.yaml
-      become: true
+    # - ansible.builtin.import_tasks: tasks/package.yaml
+    #   become: true
 
-    - ansible.builtin.import_tasks: tasks/homebrew.yaml
+    # - ansible.builtin.import_tasks: tasks/homebrew.yaml
 
-    - ansible.builtin.import_tasks: tasks/dotnet.yaml
-      when: install_dotnet
+    # - ansible.builtin.import_tasks: tasks/dotnet.yaml
+    #   when: install_dotnet
 
-    - ansible.builtin.import_tasks: tasks/docker.yaml
-      become: true
-      when: install_docker
+    # - ansible.builtin.import_tasks: tasks/docker.yaml
+    #   become: true
+    #   when: install_docker
 
-    - ansible.builtin.import_tasks: tasks/bash.yaml
+    # - ansible.builtin.import_tasks: tasks/bash.yaml
 
-    - ansible.builtin.import_tasks: tasks/git.yaml
+    # - ansible.builtin.import_tasks: tasks/git.yaml
 
-    - ansible.builtin.import_tasks: tasks/openssh.yaml
+    # - ansible.builtin.import_tasks: tasks/openssh.yaml
 
-    - ansible.builtin.import_tasks: tasks/pipx.yaml
+    # - ansible.builtin.import_tasks: tasks/pipx.yaml
 
-    - ansible.builtin.import_tasks: tasks/ansible.yaml
+    # - ansible.builtin.import_tasks: tasks/ansible.yaml
   
