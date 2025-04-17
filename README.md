@@ -4,9 +4,9 @@ Ansible playbook to setup my WSL
 ## Assumptions
 
 * Only works on my machine!
-* Recent Windows 11 23H2 / 24/H2
-* Required WSL 2.2.4 or newer
-* Required Ubuntu 24.04
+* Recent Windows 11 24/H2
+* Required WSL 2.4.13 or newer
+* Required Fedora 42
 * Requires `bash`
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
