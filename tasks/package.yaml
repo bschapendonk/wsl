@@ -3,9 +3,13 @@
   ansible.builtin.dnf:
     name: "*"
     state: latest
-    autoremove: true
     best: true
     update_cache: true
+
+- name: dnf autoremove
+  ansible.builtin.dnf:
+    state: absent
+    autoremove: true
 
 - name: dnf install
   ansible.builtin.dnf:
