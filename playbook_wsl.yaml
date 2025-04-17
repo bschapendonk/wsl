@@ -18,7 +18,7 @@
     - ansible.builtin.import_tasks: tasks/package.yaml
       become: true
 
-    # - ansible.builtin.import_tasks: tasks/homebrew.yaml
+    - ansible.builtin.import_tasks: tasks/homebrew.yaml
 
     # - ansible.builtin.import_tasks: tasks/dotnet.yaml
     #   when: install_dotnet
