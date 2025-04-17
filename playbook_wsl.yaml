@@ -25,11 +25,11 @@
 
     - ansible.builtin.import_tasks: tasks/bash.yaml
 
-    # - ansible.builtin.import_tasks: tasks/git.yaml
+    - ansible.builtin.import_tasks: tasks/git.yaml
 
-    # - ansible.builtin.import_tasks: tasks/openssh.yaml
+    - ansible.builtin.import_tasks: tasks/openssh.yaml
 
-    # - ansible.builtin.import_tasks: tasks/pipx.yaml
+    - ansible.builtin.import_tasks: tasks/pipx.yaml
 
     # - ansible.builtin.import_tasks: tasks/ansible.yaml
   
