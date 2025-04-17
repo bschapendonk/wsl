@@ -20,12 +20,8 @@
 
     - ansible.builtin.import_tasks: tasks/homebrew.yaml
 
-    # - ansible.builtin.import_tasks: tasks/dotnet.yaml
-    #   when: install_dotnet
-
-    # - ansible.builtin.import_tasks: tasks/docker.yaml
-    #   become: true
-    #   when: install_docker
+    - ansible.builtin.import_tasks: tasks/dotnet.yaml
+      when: install_dotnet
 
     # - ansible.builtin.import_tasks: tasks/bash.yaml
 

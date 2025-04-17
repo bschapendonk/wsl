@@ -1,12 +1,11 @@
 - name: Install dotnet dependencies
-  ansible.builtin.apt:
-    pkg:
-      - libc6
-      - libgcc-s1
-      - libicu74
-      - libssl3
-      - libstdc++6
-      - zlib1g
+  ansible.builtin.dnf:
+    name:
+      - krb5-libs
+      - libicu
+      - openssl-libs
+      - zlib
+    best: true
   become: true
 
 - name: Set DOTNET
