@@ -1,6 +1,6 @@
 ---
 - ansible.builtin.file:
-    path:  ~/.bashrc.d
+    path: ~/.bashrc.d
     state: directory
     mode: 0750
 
@@ -39,29 +39,23 @@
     dest: ~/.local/share/bash-completion/completions/dotnet
   when: install_dotnet
 
-- name: Set EDITOR
-  ansible.builtin.blockinfile:
-    path: ~/.bashrc
-    mode: 0640
-    marker: >-
-      # {mark} ANSIBLE MANAGED BLOCK EDITOR
-    block: |
+- name: export EDITOR
+  ansible.builtin.copy:
+    content: |-
       export EDITOR="code --new-window --wait"
-
-- name: Set KUBE_EDITOR
-  ansible.builtin.blockinfile:
-    path: ~/.bashrc
+    dest: ~/.bashrc.d/editor
     mode: 0640
-    marker: >-
-      # {mark} ANSIBLE MANAGED BLOCK KUBE_EDITOR
-    block: |
+
+- name: export KUBE_EDITOR
+  ansible.builtin.copy:
+    content: |-
       export KUBE_EDITOR="nano"
-
-- name: Add Oh My Posh to .bashrc
-  ansible.builtin.blockinfile:
-    path: ~/.bashrc
+    dest: ~/.bashrc.d/kube_editor
     mode: 0640
-    marker: >-
-      # {mark} ANSIBLE MANAGED BLOCK Oh My Posh
-    block: |
+
+- name: oh-my-posh
+  ansible.builtin.copy:
+    content: |-
       eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+    dest: ~/.bashrc.d/oh-my-posh
+    mode: 0640
