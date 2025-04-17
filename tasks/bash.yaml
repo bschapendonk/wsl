@@ -1,8 +1,12 @@
 ---
-- name: Generate bash_aliases
-  ansible.builtin.template:
-    src: templates/.bash_aliases.j2
-    dest: ~/.bash_aliases
+- ansible.builtin.file:
+    path:  ~/.bashrc.d
+    state: directory
+    mode: 0750
+
+- ansible.builtin.template:
+    src: templates/.bashrc.d/aliases.j2
+    dest: ~/.bashrc.d/aliases
     mode: 0640
 
 - ansible.builtin.file:
