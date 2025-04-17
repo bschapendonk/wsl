@@ -1,4 +1,8 @@
 ---
+- name: Import https://packages.microsoft.com/keys/microsoft.asc
+  ansible.builtin.rpm_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
 - name: Install https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
   ansible.builtin.dnf:
     name: https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
