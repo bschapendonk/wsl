@@ -31,5 +31,4 @@
 
     - ansible.builtin.import_tasks: tasks/pipx.yaml
 
-    # - ansible.builtin.import_tasks: tasks/ansible.yaml
-  
+    - ansible.builtin.import_tasks: tasks/ansible.yaml
