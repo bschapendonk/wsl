@@ -1,12 +1,8 @@
 ---
-- ansible.builtin.file:
-    path: ~/.bashrc.d
-    state: directory
-    mode: 0750
 
 - ansible.builtin.template:
-    src: templates/.bashrc.d/aliases.j2
-    dest: ~/.bashrc.d/aliases
+    src: templates/.bashrc.d/wsl_functions.j2
+    dest: ~/.bashrc.d/wsl_functions
     mode: 0640
 
 - ansible.builtin.file:

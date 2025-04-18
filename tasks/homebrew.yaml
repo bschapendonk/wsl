@@ -9,11 +9,6 @@
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     that: result.stat.exists
 
-- ansible.builtin.file:
-    path: ~/.bashrc.d
-    state: directory
-    mode: 0750
-
 - name: Homebrew shellenv
   ansible.builtin.copy:
     content: |-

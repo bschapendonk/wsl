@@ -1,0 +1,6 @@
+alias mc='mc --nosubshell'
+alias ll='ls -al --color=auto'
+
+if command -v code-insiders &>/dev/null; then
+    alias code=code-insiders
+fi
