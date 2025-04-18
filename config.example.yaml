@@ -13,6 +13,7 @@ dnf_pkg:
   - python3-libdnf5
   - pipx
   - wget
+  - yq
   # groups
   - "@development-tools"
   # dev
