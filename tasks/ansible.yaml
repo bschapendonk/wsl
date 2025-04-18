@@ -4,5 +4,6 @@
     dest: ~/.ansible.cfg
     content: |
       [defaults]
+      callback_format_pretty=true
       result_format=yaml
     mode: 0640
