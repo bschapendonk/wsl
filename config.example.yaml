@@ -22,8 +22,6 @@ dnf_pkg:
   # resume
   - texlive-scheme-full
 
-install_dotnet: yes
-
 dotnet:
   - channel: lts
 

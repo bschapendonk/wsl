@@ -37,7 +37,7 @@
 
       complete -f -F _dotnet_bash_complete dotnet
     dest: ~/.local/share/bash-completion/completions/dotnet
-  when: install_dotnet
+  when: dotnet | default([]) | length > 0
 
 - name: export EDITOR
   ansible.builtin.copy:
