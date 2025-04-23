@@ -6,7 +6,6 @@
     marker: >-
       # {mark} USER SPECIFIC ALIASES AND FUNCTIONS
     block: |
-      # User specific aliases and functions
       if [ -d ~/.bashrc.d ]; then
           for rc in ~/.bashrc.d/*; do
               if [ -f "$rc" ]; then

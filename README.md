@@ -19,6 +19,8 @@ Ansible playbook to setup my WSL
 
 ## Installation
 
+https://cdimage.ubuntu.com/ubuntu-wsl/daily-live/current/
+
 ### 1. Install WSL
 ```shell
 # install wsl and ubuntu
@@ -27,17 +29,6 @@ wsl --install Ubuntu-24.04
 # after the installation / reboots, shut wsl down and update it to the latest version
 wsl --shutdown
 wsl --update
-```
-
-```shell
-# %USERPROFILE%\.wslconfig
-[wsl2]
-networkingMode=mirrored
-dnsTunneling=true
-
-[experimental]
-autoMemoryReclaim=dropcache
-sparseVhd=true
 ```
 
 ### 2. Prepare base WSL

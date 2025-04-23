@@ -8,16 +8,14 @@
       - libstdc++6
       - zlib1g
   become: true
-
-- name: Set DOTNET
-  ansible.builtin.blockinfile:
-    path: ~/.bashrc
-    mode: 0640
-    marker: >-
-      # {mark} ANSIBLE MANAGED BLOCK DOTNET
-    block: |
+  
+- name: export DOTNET_ROOT
+  ansible.builtin.copy:
+    content: |-
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+    dest: ~/.bashrc.d/dotnet
+    mode: 0640
 
 - name: Make sure ~/.local/bin exists
   ansible.builtin.file:
