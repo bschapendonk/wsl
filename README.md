@@ -4,8 +4,8 @@ Ansible playbook to setup my WSL
 ## Assumptions
 
 * Only works on my machine!
-* Recent Windows 11 23H2 / 24/H2
-* Required WSL 2.2.4 or newer
+* Recent Windows 11 24H2
+* Required WSL 2.4.13 or newer
 * Required Ubuntu 24.04
 * Requires `bash`
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
@@ -47,7 +47,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 # install minimal required packages
-sudo apt -y install git python3-pip python3-dev python3-venv pipx sshpass wget ca-certificates
+sudo apt -y install pipx
 
 # install homebrew and activate it for the current shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -56,6 +56,10 @@ brew completions link
 
 # Add git-credential-manager
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+
+# exports
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 pipx install --include-deps ansible
 ```

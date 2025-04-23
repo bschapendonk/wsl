@@ -10,12 +10,8 @@
     that: result.stat.exists
 
 - name: Homebrew ~/.bashrc
-  ansible.builtin.blockinfile:
-    path: ~/.bashrc
-    mode: 0640
-    marker: >-
-      # {mark} ANSIBLE MANAGED BLOCK Homebrew
-    block: |
+  ansible.builtin.copy:
+    content: |-
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
       if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
@@ -27,6 +23,8 @@
           [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
         done
       fi
+    dest: ~/.bashrc.d/homebrew
+    mode: 0640
 
 - name: Homebrew update and upgrade all
   community.general.homebrew:

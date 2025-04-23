@@ -1,0 +1,5 @@
+alias mc='mc --nosubshell'
+
+if command -v code-insiders &>/dev/null; then
+    alias code=code-insiders
+fi
