@@ -10,7 +10,7 @@ ccc() {
     az-kubelogin remove-cache-dir
     az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
 {% endif %}
-    podman logout all
+    docker logout all
 }
 
 cck() {
