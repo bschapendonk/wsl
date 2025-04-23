@@ -41,7 +41,7 @@
 - name: Homebrew install packages
   community.general.homebrew:
     name: >-
-      {{ (homebrew_pkgs | default([])) + ['oh-my-posh'] }}
+      {{ (homebrew_pkg | default([])) + ['oh-my-posh'] }}
     state: present
 
 - name: Homebrew oh-my-posh
