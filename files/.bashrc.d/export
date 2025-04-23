@@ -5,3 +5,5 @@ export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
 
 export EDITOR="code --new-window --wait"
 export KUBE_EDITOR="nano"
+
+export DE=wsl
