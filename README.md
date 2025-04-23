@@ -54,6 +54,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 pipx install --include-deps ansible
 pipx inject ansible argcomplete python-debian
+pipx ensurepath
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`
