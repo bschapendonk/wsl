@@ -52,9 +52,10 @@ git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
+pipx ensurepath
+source ~/.bashrc
 pipx install --include-deps ansible
 pipx inject ansible argcomplete python-debian
-pipx ensurepath
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`
