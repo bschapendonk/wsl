@@ -9,7 +9,7 @@
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     that: result.stat.exists
 
-- name: Homebrew shellenv
+- name: Homebrew ~/.bashrc
   ansible.builtin.copy:
     content: |-
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -41,8 +41,15 @@
 - name: Homebrew install packages
   community.general.homebrew:
     name: >-
-      {{ homebrew | default([]) }}
+      {{ (homebrew_pkgs | default([])) + ['oh-my-posh'] }}
     state: present
+
+- name: Homebrew oh-my-posh
+  ansible.builtin.copy:
+    content: |-
+      eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+    dest: ~/.bashrc.d/omp
+    mode: 0640
 
 - name: Homebrew completions state
   ansible.builtin.command: brew completions state

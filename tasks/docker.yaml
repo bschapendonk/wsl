@@ -1,0 +1,27 @@
+---
+- name: Install Docker-CE
+  ansible.builtin.apt:
+    pkg:
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose-plugin
+
+- name: Enable and start docker.service
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: docker.service
+
+- name: Enable and start containerd.service
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: containerd.service
+
+- ansible.builtin.user:
+    name: >-
+      {{ ansible_facts.env.USER }}
+    groups: docker
+    append: true

@@ -12,6 +12,8 @@
         src: files/
         dest: ~/
 
+    - ansible.builtin.import_tasks: tasks/bash.yaml
+
     - ansible.builtin.import_tasks: tasks/package_sources.yaml
       become: true
 
@@ -23,7 +25,9 @@
     - ansible.builtin.import_tasks: tasks/dotnet.yaml
       when: dotnet | default([]) | length > 0
 
-    - ansible.builtin.import_tasks: tasks/bash.yaml
+    - ansible.builtin.import_tasks: tasks/docker.yaml
+      become: true
+      when: install_docker
 
     - ansible.builtin.import_tasks: tasks/git.yaml
 

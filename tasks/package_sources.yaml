@@ -1,8 +1,8 @@
 ---
-- name: Import https://packages.microsoft.com/keys/microsoft.asc
-  ansible.builtin.rpm_key:
-    key: https://packages.microsoft.com/keys/microsoft.asc
-
-- name: Install https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
-  ansible.builtin.dnf:
-    name: https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
+- ansible.builtin.deb822_repository:
+    name: docker
+    uris: https://download.docker.com/linux/ubuntu
+    suites: plucky
+    components: stable
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
+  when: install_docker
