@@ -3,7 +3,7 @@
     pkg:
       - libc6
       - libgcc-s1
-      - libicu74
+      - libicu76
       - libssl3
       - libstdc++6
       - zlib1g

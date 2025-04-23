@@ -1,21 +1,4 @@
 ---
-- name: Add Docker GPG key
-  ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/trusted.gpg.d/docker.gpg
-    mode: 0644
-
-- name: Add Docker repository into sources list
-  ansible.builtin.apt_repository:
-    repo: >-
-      deb
-      [arch=amd64]
-      [signed-by=/etc/apt/trusted.gpg.d/docker.gpg]
-      https://download.docker.com/linux/ubuntu
-      plucky
-      stable
-    filename: docker
-
 - name: Install Docker-CE
   ansible.builtin.apt:
     pkg:
