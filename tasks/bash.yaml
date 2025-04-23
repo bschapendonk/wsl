@@ -16,8 +16,8 @@
       unset rc
 
 - ansible.builtin.template:
-    src: templates/.bashrc.d/wsl_functions.j2
-    dest: ~/.bashrc.d/wsl_functions
+    src: templates/.bashrc.d/function.j2
+    dest: ~/.bashrc.d/function
     mode: 0640
 
 - ansible.builtin.file:

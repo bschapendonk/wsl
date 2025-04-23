@@ -48,7 +48,7 @@
   ansible.builtin.copy:
     content: |-
       eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
-    dest: ~/.bashrc.d/oh-my-posh
+    dest: ~/.bashrc.d/omp
     mode: 0640
 
 - name: Homebrew completions state
