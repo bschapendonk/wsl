@@ -1,11 +1,11 @@
 ---
-- name: Add Azure CLI Repository for Ubuntu
-  ansible.builtin.deb822_repository:
-    name: azure-cli
-    uris: https://packages.microsoft.com/repos/azure-cli
-    suites: noble
-    components: main
-    signed_by: https://packages.microsoft.com/keys/microsoft.asc
+# - name: Add Azure CLI Repository for Ubuntu
+#   ansible.builtin.deb822_repository:
+#     name: azure-cli
+#     uris: https://packages.microsoft.com/repos/azure-cli
+#     suites: noble
+#     components: main
+#     signed_by: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Add Docker Repository for Ubuntu
   ansible.builtin.deb822_repository:

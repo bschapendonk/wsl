@@ -1,6 +1,6 @@
 {% if az | default(false) %} 
 cca() {
-    az login --output none
+    az login --use-device-code
 }
 {% endif %}
 
@@ -23,7 +23,7 @@ cck() {
 
 {% endfor %}
 {% if az | default(false) %}
-    az login --output none
+    az login --use-device-code
 
 {% for item in az_aks | default([]) %}
     az account set --subscription {{ item.subscription }}
