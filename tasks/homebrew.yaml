@@ -41,8 +41,15 @@
 - name: Homebrew install packages
   community.general.homebrew:
     name: >-
-      {{ homebrew | default([]) }}
+      {{ (homebrew | default([])) + ['oh-my-posh'] }}
     state: present
+
+- name: Homebrew oh-my-posh
+  ansible.builtin.copy:
+    content: |-
+      eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+    dest: ~/.bashrc.d/oh-my-posh
+    mode: 0640
 
 - name: Homebrew completions state
   ansible.builtin.command: brew completions state
