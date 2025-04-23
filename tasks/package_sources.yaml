@@ -1,5 +1,6 @@
 ---
-- ansible.builtin.deb822_repository:
+- name: Add Docker Repository for Ubuntu
+  ansible.builtin.deb822_repository:
     name: docker
     uris: https://download.docker.com/linux/ubuntu
     suites: plucky

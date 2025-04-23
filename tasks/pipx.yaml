@@ -1,4 +1,4 @@
-- name: pipx install
+- name: Install Python packages with pipx
   community.general.pipx:
     name: >-
       {{ item.name }}
@@ -10,7 +10,7 @@
   loop: >-
     {{ pipx | default([]) }}
 
-- name: pipx inject
+- name: Inject additional packages into pipx environments
   community.general.pipx:
     name: >-
       {{ item.name }}

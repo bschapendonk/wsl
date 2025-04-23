@@ -7,32 +7,42 @@
       prompt: Sudo password
       private: true
   tasks:
-    - name: Copy files/ to ~/
+    - name: Copy configuration files to home directory
       ansible.builtin.copy:
         src: files/
         dest: ~/
 
-    - ansible.builtin.import_tasks: tasks/bash.yaml
+    - name: Execute Bash configuration tasks
+      ansible.builtin.import_tasks: tasks/bash.yaml
 
-    - ansible.builtin.import_tasks: tasks/package_sources.yaml
+    - name: Configure package sources
+      ansible.builtin.import_tasks: tasks/package_sources.yaml
       become: true
 
-    - ansible.builtin.import_tasks: tasks/package.yaml
+    - name: Install required packages
+      ansible.builtin.import_tasks: tasks/package.yaml
       become: true
 
-    - ansible.builtin.import_tasks: tasks/homebrew.yaml
+    - name: Install Homebrew package manager
+      ansible.builtin.import_tasks: tasks/homebrew.yaml
 
-    - ansible.builtin.import_tasks: tasks/dotnet.yaml
+    - name: Install .NET SDK and runtime
+      ansible.builtin.import_tasks: tasks/dotnet.yaml
       when: dotnet | default([]) | length > 0
 
-    - ansible.builtin.import_tasks: tasks/docker.yaml
+    - name: Install and configure Docker
+      ansible.builtin.import_tasks: tasks/docker.yaml
       become: true
       when: install_docker
 
-    - ansible.builtin.import_tasks: tasks/git.yaml
+    - name: Configure Git
+      ansible.builtin.import_tasks: tasks/git.yaml
 
-    - ansible.builtin.import_tasks: tasks/openssh.yaml
+    - name: Configure OpenSSH
+      ansible.builtin.import_tasks: tasks/openssh.yaml
 
-    - ansible.builtin.import_tasks: tasks/pipx.yaml
+    - name: Install and configure Pipx
+      ansible.builtin.import_tasks: tasks/pipx.yaml
 
-    - ansible.builtin.import_tasks: tasks/ansible.yaml
+    - name: Configure Ansible
+      ansible.builtin.import_tasks: tasks/ansible.yaml

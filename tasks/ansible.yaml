@@ -1,5 +1,5 @@
 ---
-- name: Create ~/.ansible.cfg
+- name: Copy ansible configuration file to home directory
   ansible.builtin.copy:
     dest: ~/.ansible.cfg
     content: |

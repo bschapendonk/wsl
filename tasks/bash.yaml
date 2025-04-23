@@ -1,5 +1,5 @@
 ---
-- name: User specific aliases and functions
+- name: Configure user-specific aliases and functions in .bashrc
   ansible.builtin.blockinfile:
     path: ~/.bashrc
     mode: 0640
@@ -15,12 +15,14 @@
       fi
       unset rc
 
-- ansible.builtin.template:
+- name: Deploy custom bash functions
+  ansible.builtin.template:
     src: templates/.bashrc.d/function.j2
     dest: ~/.bashrc.d/function
     mode: 0640
 
-- ansible.builtin.file:
+- name: Ensure bash-completion directory exists
+  ansible.builtin.file:
     path: ~/.local/share/bash-completion/completions
     state: directory
     mode: 0750

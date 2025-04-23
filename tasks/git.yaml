@@ -1,12 +1,12 @@
 ---
-- name: Set credential.helper ~/.gitconfig
+- name: Configure Git credential helper
   community.general.git_config:
     scope: file
     file: ~/.gitconfig
     name: credential.helper
     value: /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe
 
-- name: Set credential.https://dev.azure.com.useHttpPath ~/.gitconfig
+- name: Enable HTTP path for Azure DevOps credentials
   community.general.git_config:
     scope: file
     file: ~/.gitconfig
@@ -14,33 +14,33 @@
     value: >-
       true
 
-- name: Make sure personal directory exists
+- name: Ensure personal directory exists
   ansible.builtin.file:
     path: ~/personal
     state: directory
     mode: 0750
 
-- name: Set includeIf.gitdir:~/personal/.path ~/.gitconfig
+- name: Include personal Git configuration
   community.general.git_config:
     scope: file
     file: ~/.gitconfig
     name: includeIf.gitdir:~/personal/.path
     value: ~/personal/.gitconfig
 
-- name: Make sure work directory exists
+- name: Ensure work directory exists
   ansible.builtin.file:
     path: ~/work
     state: directory
     mode: 0750
 
-- name: Set includeIf.gitdir:~/work/.path ~/.gitconfig
+- name: Include work Git configuration
   community.general.git_config:
     scope: file
     file: ~/.gitconfig
     name: includeIf.gitdir:~/work/.path
     value: ~/work/.gitconfig
 
-- name: Set user.name in personal .gitconfig
+- name: Set personal Git user name
   community.general.git_config:
     scope: file
     file: ~/personal/.gitconfig
@@ -48,7 +48,7 @@
     value: >-
       {{ git_config_personal_name }}
 
-- name: Set user.email in personal .gitconfig
+- name: Set personal Git user email
   community.general.git_config:
     scope: file
     file: ~/personal/.gitconfig
@@ -56,7 +56,7 @@
     value: >-
       {{ git_config_personal_email }}
 
-- name: Set user.name in work .gitconfig
+- name: Set work Git user name
   community.general.git_config:
     scope: file
     file: ~/work/.gitconfig
@@ -64,7 +64,7 @@
     value: >-
       {{ git_config_work_name }}
 
-- name: Set user.email in work .gitconfig
+- name: Set work Git user email
   community.general.git_config:
     scope: file
     file: ~/work/.gitconfig
@@ -72,7 +72,7 @@
     value: >-
       {{ git_config_work_email }}
 
-- name: Clone repositories
+- name: Clone Git repositories
   ansible.builtin.git:
     repo: >-
       {{ item.repo }}

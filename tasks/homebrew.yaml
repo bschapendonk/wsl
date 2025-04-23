@@ -1,15 +1,16 @@
-- ansible.builtin.stat:
+- name: Check if Homebrew directory exists
+  ansible.builtin.stat:
     path: /home/linuxbrew
   register: result
 
-- name: Assert that Homebrew is installed
+- name: Check if Homebrew is installed
   ansible.builtin.assert:
     fail_msg: |
-      Install Homebrew
+      Homebrew is not installed. Install it using:
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     that: result.stat.exists
 
-- name: Homebrew ~/.bashrc
+- name: Configure Homebrew in ~/.bashrc
   ansible.builtin.copy:
     content: |-
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -26,36 +27,36 @@
     dest: ~/.bashrc.d/homebrew
     mode: 0640
 
-- name: Homebrew update and upgrade all
+- name: Update and upgrade Homebrew packages
   community.general.homebrew:
     update_homebrew: true
     upgrade_all: true
 
-- name: Homebrew install taps
+- name: Add Homebrew taps
   community.general.homebrew_tap:
     name: >-
       {{ item }}
   loop: >-
     {{ homebrew_taps | default([]) }}
 
-- name: Homebrew install packages
+- name: Install Homebrew packages
   community.general.homebrew:
     name: >-
       {{ (homebrew_pkg | default([])) + ['oh-my-posh'] }}
     state: present
 
-- name: Homebrew oh-my-posh
+- name: Configure oh-my-posh for bash
   ansible.builtin.copy:
     content: |-
       eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
     dest: ~/.bashrc.d/omp
     mode: 0640
 
-- name: Homebrew completions state
+- name: Check Homebrew completions state
   ansible.builtin.command: brew completions state
   changed_when: false
   register: result
 
-- name: Homebrew completions link
+- name: Link Homebrew completions
   ansible.builtin.command: brew completions link
   when: result.stdout != "Completions are linked."

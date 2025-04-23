@@ -1,4 +1,4 @@
-- name: Install dotnet dependencies
+- name: Install required dotnet dependencies
   ansible.builtin.apt:
     pkg:
       - libc6
@@ -9,19 +9,19 @@
       - zlib1g
   become: true
 
-- name: Make sure ~/.local/bin exists
+- name: Ensure ~/.local/bin directory exists
   ansible.builtin.file:
     path: ~/.local/bin
     state: directory
     mode: 0750
 
-- name: Download dotnet-install.sh
+- name: Download dotnet installation script
   ansible.builtin.get_url:
     url: https://dot.net/v1/dotnet-install.sh
     dest: ~/.local/bin
     mode: u+x
 
-- name: Install dotnet
+- name: Execute dotnet installation
   ansible.builtin.command: >-
     dotnet-install.sh
     --channel {{ item.channel | default('LTS') }}
@@ -29,7 +29,7 @@
   loop: >-
     {{ dotnet | default([]) }}
 
-- name: dotnet bash completions
+- name: Configure dotnet CLI bash completions
   ansible.builtin.copy:
     content: |-
       # bash parameter completion for the dotnet CLI
@@ -47,7 +47,7 @@
       complete -f -F _dotnet_bash_complete dotnet
     dest: ~/.local/share/bash-completion/completions/dotnet
 
-- name: Install powershell
+- name: Install PowerShell global tool
   ansible.builtin.command: dotnet tool update --global powershell
 
 - name: Install Azure Artifacts Credential Provider

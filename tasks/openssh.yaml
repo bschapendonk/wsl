@@ -1,24 +1,25 @@
 ---
-- ansible.builtin.file:
+- name: Create .ssh Directory with Secure Permissions
+  ansible.builtin.file:
     path: ~/.ssh
     state: directory
     mode: 0750
 
-- name: Generate OpenSSH ED25519 key
+- name: Generate ED25519 SSH Key Pair
   community.crypto.openssh_keypair:
     path: ~/.ssh/id_ed25519
     comment: >-
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: ed25519
 
-- name: Generate OpenSSH RSA key
+- name: Generate RSA SSH Key Pair
   community.crypto.openssh_keypair:
     path: ~/.ssh/id_rsa
     comment: >-
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: rsa
 
-- name: Generate .ssh/config
+- name: Create SSH Config File from Template
   ansible.builtin.template:
     src: templates/.ssh/config.j2
     dest: ~/.ssh/config

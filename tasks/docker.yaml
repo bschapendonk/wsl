@@ -1,5 +1,5 @@
 ---
-- name: Install Docker-CE
+- name: Install Docker and Required Packages
   ansible.builtin.apt:
     pkg:
       - containerd.io
@@ -8,19 +8,20 @@
       - docker-ce-cli
       - docker-compose-plugin
 
-- name: Enable and start docker.service
+- name: Start and Enable Docker Service
   ansible.builtin.systemd:
     state: started
     enabled: true
     name: docker.service
 
-- name: Enable and start containerd.service
+- name: Start and Enable Containerd Service
   ansible.builtin.systemd:
     state: started
     enabled: true
     name: containerd.service
 
-- ansible.builtin.user:
+- name: Add User to Docker Group
+  ansible.builtin.user:
     name: >-
       {{ ansible_facts.env.USER }}
     groups: docker
