@@ -18,13 +18,6 @@
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: rsa
 
-- name: export SSH_SK_HELPER
-  ansible.builtin.copy:
-    content: |-
-      export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
-    dest: ~/.bashrc.d/ssh
-    mode: 0640
-
 - name: Generate .ssh/config
   ansible.builtin.template:
     src: templates/.ssh/config.j2

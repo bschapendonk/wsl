@@ -1,5 +1,7 @@
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
+export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
+
 export EDITOR="code --new-window --wait"
 export KUBE_EDITOR="nano"
