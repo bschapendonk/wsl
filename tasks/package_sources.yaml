@@ -12,6 +12,7 @@
     name: docker
     uris: https://download.docker.com/linux/ubuntu
     suites: plucky
-    components: stable
+    components:
+      - stable
     signed_by: https://download.docker.com/linux/ubuntu/gpg
   when: install_docker
