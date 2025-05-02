@@ -49,11 +49,11 @@ if command -v az &>/dev/null; then
     }
 fi
 
-l() {
+ccc() {
     unset KUBECONFIG
-    
+
     if command -v az &>/dev/null; then
-        az logout --output none
+        az logout
     fi
 
     if command -v az-kubelogin &>/dev/null; then
