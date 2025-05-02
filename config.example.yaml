@@ -71,19 +71,6 @@ pipx:
 #   - name: k3s
 #     host: k3s.local
 
-# kc:
-#   - k8s
-
-# az: yes
-# az_subscriptions:
-#   - name: default
-#     subscription: 00000000-0000-0000-0000-000000000000
-# az_aks:
-#   - alias: aks
-#     name: aks
-#     resource_group: rg-aks
-#     subscription: 00000000-0000-0000-0000-000000000000
-
 # ssh_hosts:
 #   - host: test.example.com
 #   - host: test2

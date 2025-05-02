@@ -1,71 +1,67 @@
-{% if az | default(false) %} 
-cca() {
-    az login  --output none
-}
-{% endif %}
-
-ccc() {
-{% if az | default(false) %}
-    az logout --output none
-    az-kubelogin remove-cache-dir
-    az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
-{% endif %}
-    docker logout all
-}
-
-cck() {
-{% for item in k3s | default([]) %}
-    ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
-    chmod 600 $HOME/.kube/{{ item.name | lower }}
-    yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
-    yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
-    yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
-
-{% endfor %}
-{% if az | default(false) %}
-    az login  --output none
-
-{% for item in az_aks | default([]) %}
-    az account set --subscription {{ item.subscription }}
-    az aks get-credentials --resource-group {{ item.resource_group }} --name {{ item.name }} --file $HOME/.kube/{{ item.alias | lower }} --overwrite-existing
-    az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/{{ item.alias | lower }}
-    yq -i '.users[].user.exec.command |= "az-kubelogin"' $HOME/.kube/{{ item.alias | lower }}
-{% endfor %}
-    az logout --output none
-{% endif %}
-}
-
 kcu() {
     unset KUBECONFIG
+}
+
+kc() {
+    if [ -z "$1" ]; then
+        echo "Usage: kc <context>"
+        return 1
+    fi
+    export KUBECONFIG=$HOME/.kube/$1
+    if ! test -f $HOME/.kube/$1; then
+        echo "Kubeconfig file $HOME/.kube/$1 does not exist."
+        return 1
+    fi
+    kubectl config use-context $1
 }
 
 {% for item in k3s | default([]) %}
 kc{{ item.name | lower }}() {
     export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
+    if ! test -f $HOME/.kube/{{ item.name | lower }}; then
+        ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
+        chmod 600 $HOME/.kube/{{ item.name | lower }}
+        yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
+        yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+    fi
 }
-
 {% endfor %}
-{% for item in az_aks | default([]) %}
-kc{{ item.alias | lower }}() {
-    export KUBECONFIG=$HOME/.kube/{{ item.alias | lower }}
+
+if command -v az &>/dev/null; then
+    azl() {
+        az login --output none
+    }
+
+    azk() {
+        subscription="$1"
+        resource_group="$2"
+        name="$3"
+        kubeconfig="$4"
+        if [ -z "$subscription" ] || [ -z "$resource_group" ] || [ -z "$name" ] || [ -z "$kubeconfig" ]; then
+            echo "Usage: azk <subscription> <resource_group> <name> <kubeconfig>"
+            return 1
+        fi
+        az account set --subscription $subscription
+        az aks get-credentials --resource-group $resource_group --name $name --file $HOME/.kube/$kubeconfig --overwrite-existing
+        az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/$kubeconfig
+        yq -i '.users[].user.exec.command |= "az-kubelogin"' $HOME/.kube/$kubeconfig
+    }
+fi
+
+l() {
+    unset KUBECONFIG
+    
+    if command -v az &>/dev/null; then
+        az logout --output none
+    fi
+
+    if command -v az-kubelogin &>/dev/null; then
+        az-kubelogin remove-cache-dir
+        az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
+    fi
+
+    if command -v docker &>/dev/null; then
+        docker logout all
+    fi
 }
-
-{% endfor %}
-{% for item in kc | default([]) %}
-kc{{ item | lower }}() {
-    export KUBECONFIG=$HOME/.kube/{{ item | lower }}
-}
-
-{% endfor %}
-{% for item in az_subscriptions | default([]) %}
-az{{ item.name | lower }}() {
-    az account set --subscription {{ item.subscription }}
-}
-
-{% endfor %}
-{% for item in az_aks | default([]) %}
-az{{ item.alias | lower }}() {
-    az account set --subscription {{ item.subscription }}
-}
-
-{% endfor %}
