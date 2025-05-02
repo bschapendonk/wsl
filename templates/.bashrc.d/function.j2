@@ -1,27 +1,38 @@
+# Unset KUBECONFIG environment variable
 kcu() {
     unset KUBECONFIG
 }
 
+# Set KUBECONFIG to a specific kubeconfig file
 kc() {
+    # Check if argument is provided
     if [ -z "$1" ]; then
         echo "Usage: kc <context>"
         return 1
     fi
     
+    # Verify kubeconfig file exists in .kube directory
     if ! test -f $HOME/.kube/$1; then
         echo "Kubeconfig file $HOME/.kube/$1 does not exist."
         return 1
     fi
 
+    # Set KUBECONFIG environment variable to point to the specified kubeconfig file
     export KUBECONFIG=$HOME/.kube/$1
 }
 
+# Generate functions for each k3s cluster defined in configuration
 {% for item in k3s | default([]) %}
+# Function to fetch and configure kubeconfig for {{ item.name }} k3s cluster
 kc{{ item.name | lower }}() {
     if ! test -f $HOME/.kube/{{ item.name | lower }}; then
+        # Fetch k3s kubeconfig from remote host
         ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
+        # Set proper permissions
         chmod 600 $HOME/.kube/{{ item.name | lower }}
+        # Update cluster server URL
         yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
+        # Update context name
         yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
         yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
     fi
@@ -30,11 +41,14 @@ kc{{ item.name | lower }}() {
 }
 {% endfor %}
 
+# Azure CLI specific functions
 if command -v az &>/dev/null; then
+    # Login to Azure CLI
     azl() {
         az login --output none
     }
 
+    # Get and configure AKS cluster credentials
     azk() {
         subscription="$1"
         resource_group="$2"
@@ -44,25 +58,34 @@ if command -v az &>/dev/null; then
             echo "Usage: azk <subscription> <resource_group> <name> <kubeconfig>"
             return 1
         fi
+        # Set Azure subscription
         az account set --subscription $subscription
+        # Get AKS credentials
         az aks get-credentials --resource-group $resource_group --name $name --file $HOME/.kube/$kubeconfig --overwrite-existing
+        # Convert kubeconfig for az-kubelogin
         az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/$kubeconfig
+        # Update kubeconfig to use az-kubelogin
         yq -i '.users[].user.exec.command |= "az-kubelogin"' $HOME/.kube/$kubeconfig
     }
 fi
 
+# Clear all cloud and container credentials
 ccc() {
+    # Clear kubectl context
     unset KUBECONFIG
 
+    # Logout from Azure CLI if available
     if command -v az &>/dev/null; then
         az logout
     fi
 
+    # Clear az-kubelogin cache if available
     if command -v az-kubelogin &>/dev/null; then
         az-kubelogin remove-cache-dir
         az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
     fi
 
+    # Logout from all Docker registries if Docker is available
     if command -v docker &>/dev/null; then
         docker logout all
     fi
