@@ -7,17 +7,17 @@ kc() {
         echo "Usage: kc <context>"
         return 1
     fi
-    export KUBECONFIG=$HOME/.kube/$1
+    
     if ! test -f $HOME/.kube/$1; then
         echo "Kubeconfig file $HOME/.kube/$1 does not exist."
         return 1
     fi
-    kubectl config use-context $1
+
+    export KUBECONFIG=$HOME/.kube/$1
 }
 
 {% for item in k3s | default([]) %}
 kc{{ item.name | lower }}() {
-    export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
     if ! test -f $HOME/.kube/{{ item.name | lower }}; then
         ssh {{ item.host }} "sudo cat /etc/rancher/k3s/k3s.yaml" >$HOME/.kube/{{ item.name | lower }}
         chmod 600 $HOME/.kube/{{ item.name | lower }}
@@ -25,6 +25,8 @@ kc{{ item.name | lower }}() {
         yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
         yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
     fi
+
+    export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
 }
 {% endfor %}
 
