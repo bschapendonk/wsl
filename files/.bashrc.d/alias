@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias mc="mc --no-x11"
 
 if command -v code-insiders &>/dev/null; then
