@@ -12,7 +12,6 @@
 		"redhat.ansible",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
-		"samuelcolvin.jinjahtml",
 		"VisualStudioExptTeam.vscodeintellicode"
 	]
 }
