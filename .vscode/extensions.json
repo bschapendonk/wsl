@@ -1,6 +1,6 @@
 {
 	"recommendations": [
-		"HashiCorp.HCL",
+		"foxundermoon.shell-format",
 		"James-Yu.latex-workshop",
 		"ms-azure-devops.azure-pipelines",
 		"ms-azuretools.vscode-bicep",
@@ -9,8 +9,10 @@
 		"ms-python.python",
 		"ms-vscode-remote.remote-wsl",
 		"ms-vscode.PowerShell",
+		"redhat.ansible",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
+		"samuelcolvin.jinjahtml",
 		"VisualStudioExptTeam.vscodeintellicode"
 	]
 }
