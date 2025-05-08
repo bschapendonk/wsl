@@ -1,5 +1,64 @@
 #!/usr/bin/env bash
 
+kcc() {
+    # Check if ~/.kube directory exists
+    kube_dir="$HOME/.kube"
+    if [[ ! -d "$kube_dir" ]]; then
+        echo "Error: ~/.kube directory does not exist."
+        return 1
+    fi
+
+    # List only regular files in ~/.kube
+    kubeconfigs=()
+    menu_options=()
+    for file in "$kube_dir"/*; do
+        if [[ -f "$file" ]]; then
+            kubeconfigs+=("$file")
+            # Extract the context name from the kubeconfig file
+            context_name=$(kubectl config view --kubeconfig="$file" -o jsonpath='{.contexts[0].name}' 2>/dev/null)
+            context_name=${context_name:-"Unknown Context"} # Fallback if context name is not found
+            menu_options+=("$context_name:$file")
+        fi
+    done
+
+    if [[ ${#menu_options[@]} -eq 0 ]]; then
+        echo "Error: No kubeconfig files found in ~/.kube."
+        return 1
+    fi
+
+    # Sort menu options alphabetically by context name
+    IFS=$'\n' sorted_menu_options=($(sort <<<"${menu_options[*]}"))
+    unset IFS
+
+    # Prepare sorted menu options for whiptail
+    display_options=()
+    kubeconfigs=()
+    for i in "${!sorted_menu_options[@]}"; do
+        context_name="${sorted_menu_options[i]%%:*}"
+        kubeconfig_path="${sorted_menu_options[i]#*:}"
+        display_options+=("$((i + 1))" "$context_name")
+        kubeconfigs+=("$kubeconfig_path")
+    done
+
+    # Get terminal dimensions and reduce by 15%
+    full_height=$(tput lines)
+    full_width=$(tput cols)
+    height=$((full_height - full_height * 15 / 100))
+    width=$((full_width - full_width * 15 / 100))
+
+    # Show whiptail menu to select a kubeconfig
+    selected_option=$(whiptail --title "Select Kubeconfig" --menu "Choose a context:" "$height" "$width" "${#display_options[@]}" \
+        "${display_options[@]}" 3>&1 1>&2 2>&3)
+
+    # Handle selection
+    if [[ -n "$selected_option" ]]; then
+        selected_kubeconfig="${kubeconfigs[$((selected_option - 1))]}"
+        export KUBECONFIG="$selected_kubeconfig"
+    else
+        unset KUBECONFIG
+    fi
+}
+
 kns() {
     # Check if kubectl is configured with a current context
     if ! kubectl config current-context &>/dev/null; then
