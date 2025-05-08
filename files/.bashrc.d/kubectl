@@ -1,20 +1,30 @@
 #!/usr/bin/env bash
 
+# Function to select a kubeconfig file and set the KUBECONFIG environment variable
 kcc() {
-    # Check if ~/.kube directory exists
+    # Ensure ~/.kube directory exists
     kube_dir="$HOME/.kube"
     if [[ ! -d "$kube_dir" ]]; then
         echo "Error: ~/.kube directory does not exist."
         return 1
     fi
 
-    # List only regular files in ~/.kube
+    # Ensure required tools are available
+    if ! command -v kubectl &>/dev/null; then
+        echo "Error: 'kubectl' is not installed or not in PATH."
+        return 1
+    fi
+    if ! command -v whiptail &>/dev/null; then
+        echo "Error: 'whiptail' is not installed or not in PATH."
+        return 1
+    fi
+
+    # Collect kubeconfig files and their contexts
     kubeconfigs=()
     menu_options=()
     for file in "$kube_dir"/*; do
         if [[ -f "$file" ]]; then
             kubeconfigs+=("$file")
-            # Extract the context name from the kubeconfig file
             context_name=$(kubectl config view --kubeconfig="$file" -o jsonpath='{.contexts[0].name}' 2>/dev/null)
             context_name=${context_name:-"Unknown Context"} # Fallback if context name is not found
             menu_options+=("$context_name:$file")
@@ -30,7 +40,7 @@ kcc() {
     IFS=$'\n' sorted_menu_options=($(sort <<<"${menu_options[*]}"))
     unset IFS
 
-    # Prepare sorted menu options for whiptail
+    # Prepare options for whiptail menu
     display_options=()
     kubeconfigs=()
     for i in "${!sorted_menu_options[@]}"; do
@@ -40,13 +50,13 @@ kcc() {
         kubeconfigs+=("$kubeconfig_path")
     done
 
-    # Get terminal dimensions and reduce by 15%
+    # Get terminal dimensions and adjust for whiptail
     full_height=$(tput lines)
     full_width=$(tput cols)
     height=$((full_height - full_height * 15 / 100))
     width=$((full_width - full_width * 15 / 100))
 
-    # Show whiptail menu to select a kubeconfig
+    # Display whiptail menu to select a kubeconfig
     selected_option=$(whiptail --title "Select Kubeconfig" --menu "Choose a context:" "$height" "$width" "${#display_options[@]}" \
         "${display_options[@]}" 3>&1 1>&2 2>&3)
 
@@ -55,19 +65,34 @@ kcc() {
         selected_kubeconfig="${kubeconfigs[$((selected_option - 1))]}"
         export KUBECONFIG="$selected_kubeconfig"
     else
+        if kubectl config current-context &>/dev/null; then
+            kubectl config set-context --current --namespace=
+        fi
         unset KUBECONFIG
     fi
 }
 
+# Function to select a namespace and set it in the current kubectl context
 kns() {
-    # Check if kubectl is configured with a current context
+    # Ensure kubectl is configured with a current context
     if ! kubectl config current-context &>/dev/null; then
         echo "Error: No current-context is set in kubectl. Please configure your Kubernetes context and try again."
         return 1
     fi
 
+    # Ensure required tools are available
+    if ! command -v whiptail &>/dev/null; then
+        echo "Error: 'whiptail' is not installed or not in PATH."
+        return 1
+    fi
+
     # Fetch namespaces and format them for whiptail menu
-    namespaces=$(kubectl get namespaces --template="{{range .items}}{{.metadata.name}} {{end}}")
+    namespaces=$(kubectl get namespaces --template="{{range .items}}{{.metadata.name}} {{end}}" 2>/dev/null)
+    if [[ -z "$namespaces" ]]; then
+        echo "Error: Unable to fetch namespaces. Ensure you have the correct permissions."
+        return 1
+    fi
+
     IFS=' ' read -r -a namespace_array <<<"$namespaces"
 
     # Prepare whiptail menu options
@@ -76,20 +101,20 @@ kns() {
         menu_options+=("$((i + 1))" "${namespace_array[i]}")
     done
 
-    # Get terminal dimensions and reduce by 15%
+    # Get terminal dimensions and adjust for whiptail
     full_height=$(tput lines)
     full_width=$(tput cols)
     height=$((full_height - full_height * 15 / 100))
     width=$((full_width - full_width * 15 / 100))
 
-    # Show whiptail menu to select a namespace
+    # Display whiptail menu to select a namespace
     selected_option=$(whiptail --title "Select Namespace" --menu "Choose a namespace:" "$height" "$width" "${#namespace_array[@]}" \
         "${menu_options[@]}" 3>&1 1>&2 2>&3)
 
-    # Export the selected namespace
+    # Handle selection
     if [[ -n "$selected_option" ]]; then
         selected_namespace="${namespace_array[$((selected_option - 1))]}"
-        kubectl config set-context --current --namespace=$selected_namespace
+        kubectl config set-context --current --namespace="$selected_namespace"
     else
         kubectl config set-context --current --namespace=
     fi
