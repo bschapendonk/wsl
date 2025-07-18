@@ -41,11 +41,6 @@
     - name: Configure OpenSSH
       ansible.builtin.import_tasks: tasks/openssh.yaml
 
-    - name: Configure OpenSSH-Server
-      ansible.builtin.import_tasks: tasks/openssh-server.yaml
-      become: true
-      when: lookup('env', 'NAME') == 'PRECISION-5470'
-
     - name: Install and configure Pipx
       ansible.builtin.import_tasks: tasks/pipx.yaml
 
