@@ -1,12 +1,13 @@
-shortCut: Shift-S
+shortCut: w
 description: Open PowerShell terminal
 scopes:
+  - pods
   - containers
 command: bash
 background: false
 args:
   - -c
-  - >-
+  - >
     SHELL_CHOICE=$(whiptail --title "Select Shell" --menu "Choose a shell to start:" 15 60 2
     "pwsh" "PowerShell (pwsh)"
     "powershell" "Windows PowerShell (powershell)"
@@ -14,7 +15,27 @@ args:
 
     EXIT_STATUS=$?;
     if [ $EXIT_STATUS -ne 0 ]; then
+      echo "Shell selection cancelled.";
       exit 0;
     fi;
 
-    kubectl --kubeconfig="$KUBECONFIG" exec -it --context "$CONTEXT" -n="$NAMESPACE" "$POD" --target="$NAME" -- $SHELL_CHOICE
+    if [ -n "$POD" ]; then
+      pod=$POD;
+      if [ -n "$CONTAINER" ]; then
+        container="--container $CONTAINER";
+      fi;
+    else
+      pod=$NAME;
+    fi;
+
+    kubectl
+    exec
+    $pod
+    --context $CONTEXT
+    $container
+    --kubeconfig $KUBECONFIG
+    --namespace $NAMESPACE
+    --stdin=true
+    --tty=true
+    --
+    $SHELL_CHOICE
