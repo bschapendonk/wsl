@@ -17,7 +17,7 @@ args:
       _name=$NAME;
     fi;
 
-    _command=$(whiptail --title "WHell (WHiptail SHell)" --menu "pod/container: $_name" 15 60 5
+    _command=$(whiptail --title "WHell (WHiptail SHell)" --menu "$_name" 15 60 5
     "bash" "Bourne Again SHell"
     "cmd" "Command Interpreter"
     "powershell" "Windows PowerShell"
