@@ -1,0 +1,28 @@
+shortCut: Shift-D
+description: Debug Node
+scopes:
+  - node
+command: bash
+background: false
+args:
+  - -c
+  - >
+    _image=$(whiptail --title "node/$NAME" --menu "Select image" 15 70 3
+    "digitalocean/doks-debug" "DigitalOcean DOKS Debug"
+    "mcr.microsoft.com/powershell:alpine" "PowerShell (Linux)"
+    "mcr.microsoft.com/powershell:nanoserver" "PowerShell (Windows)"
+    3>&1 1>&2 2>&3);
+
+    if [ $? -ne 0 ]; then
+      exit 0;
+    fi;
+
+    kubectl
+    debug
+    node/$NAME
+    --context $CONTEXT
+    --image=$_image
+    --kubeconfig $KUBECONFIG
+    --profile=general
+    --stdin=true
+    --tty=true;

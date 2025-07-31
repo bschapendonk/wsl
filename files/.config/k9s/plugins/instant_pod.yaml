@@ -1,0 +1,35 @@
+shortCut: Shift-D
+description: Instant Pod
+scopes:
+  - pod
+command: bash
+background: false
+args:
+  - -c
+  - >
+    _image=$(whiptail --title "Instant Pod" --menu "Select image" 15 70 3
+    "digitalocean/doks-debug" "DigitalOcean DOKS Debug"
+    "mcr.microsoft.com/powershell:alpine" "PowerShell (Linux)"
+    "mcr.microsoft.com/powershell:nanoserver" "PowerShell (Windows)"
+    3>&1 1>&2 2>&3);
+
+    if [ $? -ne 0 ]; then
+      exit 0;
+    fi;
+
+    _user=$(whoami);
+    _os="linux";
+    if [ $_image == "mcr.microsoft.com/powershell:nanoserver" ]; then
+      _os="windows";
+    fi;
+
+    kubectl
+    run
+    instant-pod-$_user
+    --context $CONTEXT
+    --image=$_image
+    --kubeconfig $KUBECONFIG
+    --overrides='{"apiVersion": "v1", "spec": {"nodeSelector": {"kubernetes.io/os": "'$_os'"}}}'
+    --rm=true
+    --stdin=true
+    --tty=true
