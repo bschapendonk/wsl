@@ -1,0 +1,20 @@
+shortCut: Shift-S
+description: Open PowerShell terminal
+scopes:
+  - containers
+command: bash
+background: false
+args:
+  - -c
+  - >-
+    SHELL_CHOICE=$(whiptail --title "Select Shell" --menu "Choose a shell to start:" 15 60 2
+    "pwsh" "PowerShell (pwsh)"
+    "powershell" "Windows PowerShell (powershell)"
+    3>&1 1>&2 2>&3);
+
+    EXIT_STATUS=$?;
+    if [ $EXIT_STATUS -ne 0 ]; then
+      exit 0;
+    fi;
+
+    kubectl --kubeconfig="$KUBECONFIG" exec -it --context "$CONTEXT" -n="$NAMESPACE" "$POD" --target="$NAME" -- $SHELL_CHOICE
