@@ -8,9 +8,21 @@ background: false
 args:
   - -c
   - >
-    SHELL_CHOICE=$(whiptail --title "Select Shell" --menu "Choose a shell to start:" 15 60 2
+    if [ -n "$POD" ]; then
+      _pod=$POD;
+      _container="--container $NAME";
+      _title="$_pod/$NAME";
+    else
+      _pod=$NAME;
+      _title=$NAME;
+    fi;
+
+    SHELL_CHOICE=$(whiptail --title "$_title" --menu "Choose" 15 60 5
+    "bash" "Bash shell (bash)"
+    "cmd" "Command Interpreter (cmd.exe)"
+    "powershell" "Windows PowerShell (powershell.exe)"
     "pwsh" "PowerShell (pwsh)"
-    "powershell" "Windows PowerShell (powershell)"
+    "sh" "default shell (sh)"
     3>&1 1>&2 2>&3);
 
     EXIT_STATUS=$?;
@@ -19,20 +31,11 @@ args:
       exit 0;
     fi;
 
-    if [ -n "$POD" ]; then
-      pod=$POD;
-      if [ -n "$CONTAINER" ]; then
-        container="--container $CONTAINER";
-      fi;
-    else
-      pod=$NAME;
-    fi;
-
     kubectl
     exec
-    $pod
+    $_pod
     --context $CONTEXT
-    $container
+    $_container
     --kubeconfig $KUBECONFIG
     --namespace $NAMESPACE
     --stdin=true
