@@ -1,0 +1,42 @@
+shortCut: w
+description: WHell (WHiptail SHell)
+scopes:
+  - container
+  - pod
+command: bash
+background: false
+args:
+  - -c
+  - >
+    if [ -n "$POD" ]; then
+      _pod=$POD;
+      _container="--container $NAME";
+      _name="$_pod/$NAME";
+    else
+      _pod=$NAME;
+      _name=$NAME;
+    fi;
+
+    _command=$(whiptail --title "WHell (WHiptail SHell)" --menu "pod/container: $_name" 15 60 5
+    "bash" "Bourne Again SHell"
+    "cmd" "Command Interpreter"
+    "powershell" "Windows PowerShell"
+    "pwsh" "PowerShell"
+    "sh" "Default SHell"
+    3>&1 1>&2 2>&3);
+
+    if [ $? -ne 0 ]; then
+      exit 0;
+    fi;
+
+    kubectl
+    exec
+    $_pod
+    --context $CONTEXT
+    $_container
+    --kubeconfig $KUBECONFIG
+    --namespace $NAMESPACE
+    --stdin=true
+    --tty=true
+    --
+    $_command
