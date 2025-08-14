@@ -29,6 +29,7 @@ args:
     --context $CONTEXT
     --image=$_image
     --kubeconfig $KUBECONFIG
+    --namespace $NAMESPACE
     --overrides='{"apiVersion": "v1", "spec": {"nodeSelector": {"kubernetes.io/os": "'$_os'"}}}'
     --rm=true
     --stdin=true
