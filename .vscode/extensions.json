@@ -9,7 +9,6 @@
 		"ms-python.python",
 		"ms-vscode-remote.remote-wsl",
 		"ms-vscode.PowerShell",
-		"redhat.ansible",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
 		"VisualStudioExptTeam.vscodeintellicode"
