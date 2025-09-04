@@ -69,6 +69,7 @@ if command -v az &>/dev/null; then
         az account set --subscription $subscription
         # Get AKS credentials
         az aks get-credentials --resource-group $resource_group --name $name --file $HOME/.kube/$kubeconfig --overwrite-existing
+        chmod 600 $HOME/.kube/$kubeconfig
         # Convert kubeconfig for az-kubelogin
         az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/$kubeconfig
         # Update kubeconfig to use az-kubelogin
