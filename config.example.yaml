@@ -9,61 +9,58 @@ apt_pkg:
   - bash-completion
   - bind9-dnsutils
   - build-essential
-  - cmake
-  - curl
   - git
+  - golang
   - htop
   - ipcalc
+  - iputils-ping
   - iputils-tracepath
+  - jq
   - pipx
   - mc
-  - software-properties-common
+  - mtr-tiny
   - traceroute
   - unzip
   - wget
   - whois
-  - wslu
-  - xz-utils
+  - yq
   # dev
   - azure-cli
   # tex
-  # - chktex
-  # - latexmk
   # - texlive-full
 
 install_docker: yes
 
-# dotnet also installs powershell as a dotnet tool
-install_dotnet: yes
-
 dotnet:
   - channel: lts
+  - channel: 9.0
+  # - channel: 10.0
+  #   quality: preview
 
 homebrew_taps:
   - azure/kubelogin
+  - derailed/k9s
   - fluxcd/tap
   - hashicorp/tap
+  - int128/kubelogin
 
-homebrew:
-  - Azure/kubelogin/kubelogin
-  - cmctl
+homebrew_pkg:
+  - azure/kubelogin/az-kubelogin
+  - derailed/k9s/k9s
   - fluxcd/tap/flux
-  - hashicorp/tap/packer
+  - hashicorp/tap/terraform
   - helm
-  - jq
-  - k9s
+  - int128/kubelogin/kubelogin
   - kubectl
   - kustomize
-  - oh-my-posh
-  - yq
-
-bash_completions:
-  - kubelogin
   - oh-my-posh
 
 pipx:
   - name: ansible
     deps: yes
+    inject:
+      - argcomplete
+      - python-debian
   - name: ansible-builder
 
 # All the k3s/kc/az stuff is mainly for .bash_aliases
