@@ -1,3 +1,4 @@
+---
 - name: Install required dotnet dependencies
   ansible.builtin.apt:
     pkg:

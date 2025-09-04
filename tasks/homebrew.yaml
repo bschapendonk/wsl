@@ -1,3 +1,4 @@
+---
 - name: Check if Homebrew directory exists
   ansible.builtin.stat:
     path: /home/linuxbrew
