@@ -33,10 +33,10 @@ kc{{ item.name | lower }}() {
         # Set proper permissions
         chmod 600 $HOME/.kube/{{ item.name | lower }}
         # Update cluster server URL
-        yq -i '.clusters[].cluster.server |= "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.clusters[].cluster.server = "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
         # Update context name
-        yq -i '.contexts[].name |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
-        yq -i '.current-context |= "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.contexts[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.["current-context"] = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
     fi
 
     export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
@@ -67,7 +67,7 @@ if command -v az &>/dev/null; then
         # Convert kubeconfig for az-kubelogin
         az-kubelogin convert-kubeconfig -l azurecli --kubeconfig $HOME/.kube/$kubeconfig
         # Update kubeconfig to use az-kubelogin
-        yq -i '.users[].user.exec.command |= "az-kubelogin"' $HOME/.kube/$kubeconfig
+        yq --yaml-output --in-place '.users[].user.exec.command = "az-kubelogin"' $HOME/.kube/$kubeconfig
     }
 fi
 
