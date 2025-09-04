@@ -33,10 +33,15 @@ kc{{ item.name | lower }}() {
         # Set proper permissions
         chmod 600 $HOME/.kube/{{ item.name | lower }}
         # Update cluster server URL
-        yq --yaml-output --in-place '.clusters[].cluster.server = "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
-        # Update context name
-        yq --yaml-output --in-place '.contexts[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
         yq --yaml-output --in-place '.["current-context"] = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.clusters[].cluster.name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.clusters[].cluster.server = "https://{{ item.host }}:6443"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.clusters[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.contexts[].context.cluster = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.contexts[].context.user = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.contexts[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.contexts[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
+        yq --yaml-output --in-place '.users[].name = "{{ item.name | lower }}"' $HOME/.kube/{{ item.name | lower }}
     fi
 
     export KUBECONFIG=$HOME/.kube/{{ item.name | lower }}
