@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: ~/.ssh
     state: directory
-    mode: 0750
+    mode: 0700
 
 - name: Generate ED25519 SSH Key Pair
   community.crypto.openssh_keypair:

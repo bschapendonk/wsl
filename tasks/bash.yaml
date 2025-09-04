@@ -26,3 +26,9 @@
     path: ~/.local/share/bash-completion/completions
     state: directory
     mode: 0750
+
+- name: Ensure ~/.kube directory exists
+  ansible.builtin.file:
+    path: ~/.kube
+    state: directory
+    mode: 0700
