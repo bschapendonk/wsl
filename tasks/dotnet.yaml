@@ -1,9 +1,11 @@
 - name: Install required dotnet dependencies
   ansible.builtin.apt:
     pkg:
+      - ca-certificates
       - libc6
       - libgcc-s1
-      - libicu76
+      - libicu74
+      - liblttng-ust1
       - libssl3
       - libstdc++6
       - zlib1g

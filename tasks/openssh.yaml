@@ -11,6 +11,7 @@
     comment: >-
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: ed25519
+    mode: 0600
 
 - name: Generate RSA SSH Key Pair
   community.crypto.openssh_keypair:
@@ -18,6 +19,7 @@
     comment: >-
       {{ ansible_facts.env.USER }}@{{ ansible_facts.env.NAME }}
     type: rsa
+    mode: 0600
 
 - name: Create SSH Config File from Template
   ansible.builtin.template:
