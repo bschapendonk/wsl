@@ -4,7 +4,8 @@
     name: azure-cli
     uris: https://packages.microsoft.com/repos/azure-cli
     suites: noble
-    components: main
+    components:
+      - main
     signed_by: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Add Docker Repository for Ubuntu
