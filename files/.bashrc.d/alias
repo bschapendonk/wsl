@@ -6,14 +6,24 @@ if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
 
-# Automatically create aliases for all ansible-related executables in ~/.ansible/bin
-ansible_bin_dir=$HOME/.ansible/bin
-if [ -d $ansible_bin_dir ]; then
-    for ansible_exe in $ansible_bin_dir/ansible*; do
-        if [ -f $ansible_exe ]; then
-            alias_name=$(basename "$ansible_exe")
-            alias $alias_name=$ansible_exe
-        fi
-    done
-    unset ansible_exe alias_name ansible_bin_dir
+if [ -d $HOME/.ansible ]; then
+    alias anisible=$HOME/.ansible/bin/ansible
+    alias anisible-builder=$HOME/.ansible/bin/ansible-builder
+    alias anisible-community=$HOME/.ansible/bin/ansible-community
+    alias anisible-config=$HOME/.ansible/bin/ansible-config
+    alias anisible-console=$HOME/.ansible/bin/ansible-console
+    alias anisible-doc=$HOME/.ansible/bin/ansible-doc
+    alias anisible-galaxy=$HOME/.ansible/bin/ansible-galaxy
+    alias anisible-inventory=$HOME/.ansible/bin/ansible-inventory
+    alias anisible-playbook=$HOME/.ansible/bin/ansible-playbook
+    alias anisible-pull=$HOME/.ansible/bin/ansible-pull
+    alias anisible-test=$HOME/.ansible/bin/ansible-test
+    alias anisible-vault=$HOME/.ansible/bin/ansible-vault
+
+    if [ ! -f $HOME/.bashrc.d/ansible-argcomplete ]; then
+        $HOME/.ansible/bin/activate-global-python-argcomplete --dest - > $HOME/.bashrc.d/ansible-argcomplete
+        source $HOME/.bashrc.d/ansible-argcomplete
+    fi
 fi
+
+
