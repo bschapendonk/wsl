@@ -7,18 +7,18 @@ if command -v code-insiders &>/dev/null; then
 fi
 
 if [ -d $HOME/.ansible ]; then
-    alias anisible=$HOME/.ansible/bin/ansible
-    alias anisible-builder=$HOME/.ansible/bin/ansible-builder
-    alias anisible-community=$HOME/.ansible/bin/ansible-community
-    alias anisible-config=$HOME/.ansible/bin/ansible-config
-    alias anisible-console=$HOME/.ansible/bin/ansible-console
-    alias anisible-doc=$HOME/.ansible/bin/ansible-doc
-    alias anisible-galaxy=$HOME/.ansible/bin/ansible-galaxy
-    alias anisible-inventory=$HOME/.ansible/bin/ansible-inventory
-    alias anisible-playbook=$HOME/.ansible/bin/ansible-playbook
-    alias anisible-pull=$HOME/.ansible/bin/ansible-pull
-    alias anisible-test=$HOME/.ansible/bin/ansible-test
-    alias anisible-vault=$HOME/.ansible/bin/ansible-vault
+    alias ansible=$HOME/.ansible/bin/ansible
+    alias ansible-builder=$HOME/.ansible/bin/ansible-builder
+    alias ansible-community=$HOME/.ansible/bin/ansible-community
+    alias ansible-config=$HOME/.ansible/bin/ansible-config
+    alias ansible-console=$HOME/.ansible/bin/ansible-console
+    alias ansible-doc=$HOME/.ansible/bin/ansible-doc
+    alias ansible-galaxy=$HOME/.ansible/bin/ansible-galaxy
+    alias ansible-inventory=$HOME/.ansible/bin/ansible-inventory
+    alias ansible-playbook=$HOME/.ansible/bin/ansible-playbook
+    alias ansible-pull=$HOME/.ansible/bin/ansible-pull
+    alias ansible-test=$HOME/.ansible/bin/ansible-test
+    alias ansible-vault=$HOME/.ansible/bin/ansible-vault
 
     # source <($HOME/.ansible/bin/activate-global-python-argcomplete --dest -)
 fi
