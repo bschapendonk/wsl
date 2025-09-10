@@ -6,12 +6,14 @@ if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
 
-if [ -d ~/.ansible/bin ]; then
-    for bin in ~/.ansible/bin/ansible*; do
-        if [ -f "$bin" ]; then
-            alias_name=$(basename "$bin")
-            alias "$alias_name"="$bin"
+# Automatically create aliases for all ansible-related executables in ~/.ansible/bin
+ansible_bin_dir="~/.ansible/bin"
+if [ -d "$ansible_bin_dir" ]; then
+    for ansible_exe in "$ansible_bin_dir"/ansible*; do
+        if [ -f "$ansible_exe" ]; then
+            alias_name="$(basename "$ansible_exe")"
+            alias "$alias_name"="$ansible_exe"
         fi
     done
-    unset bin alias_name
+    unset ansible_exe alias_name ansible_bin_dir
 fi
