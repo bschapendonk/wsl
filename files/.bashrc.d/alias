@@ -19,4 +19,5 @@ if [ -d $HOME/.ansible ]; then
     alias ansible-pull=$HOME/.ansible/bin/ansible-pull
     alias ansible-test=$HOME/.ansible/bin/ansible-test
     alias ansible-vault=$HOME/.ansible/bin/ansible-vault
+    # eval "$(register-python-argcomplete $HOME/.ansible/bin/ansible)"
 fi
