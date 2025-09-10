@@ -20,10 +20,7 @@ if [ -d $HOME/.ansible ]; then
     alias anisible-test=$HOME/.ansible/bin/ansible-test
     alias anisible-vault=$HOME/.ansible/bin/ansible-vault
 
-    if [ ! -f $HOME/.bashrc.d/ansible-argcomplete ]; then
-        $HOME/.ansible/bin/activate-global-python-argcomplete --dest - > $HOME/.bashrc.d/ansible-argcomplete
-        source $HOME/.bashrc.d/ansible-argcomplete
-    fi
+    # source <($HOME/.ansible/bin/activate-global-python-argcomplete --dest -)
 fi
 
 
