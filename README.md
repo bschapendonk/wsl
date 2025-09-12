@@ -36,7 +36,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 # install minimal required packages
-sudo apt -y install python3-pip
+sudo apt -y install python3-debian python3-pip python3-venv
 
 # install homebrew and activate it for the current shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
