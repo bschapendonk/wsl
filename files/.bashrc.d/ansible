@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
 if [ -d ~/.ansible/bin ]; then
-    # Add Ansible binaries to PATH last not to override system commands
     export PATH="$PATH:$HOME/.ansible/bin"
 fi
