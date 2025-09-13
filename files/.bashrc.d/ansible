@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
-if [ -d ~/.ansible/bin ]; then
-    export PATH="$PATH:$HOME/.ansible/bin"
-fi
+for target in $HOME/.ansible/bin/ansible*; do
+    basename=$(basename $target)
+    linkname="$HOME/.local/bin/$basename"
+    if [ -L $linkname ]; then
+        if [ "$(readlink $linkname)" != "$target" ]; then
+            ln -sf $target $linkname
+        fi
+    elif [ -e $linkname ]; then
+        echo "Warning: $linkname exists and is not a symlink. Skipping."
+    else
+        ln -s $target $linkname
+    fi
+done
