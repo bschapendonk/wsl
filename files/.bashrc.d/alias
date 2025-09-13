@@ -6,17 +6,18 @@ if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
 
-if [ -d $HOME/.ansible ]; then
-    alias ansible=$HOME/.ansible/bin/ansible
-    alias ansible-builder=$HOME/.ansible/bin/ansible-builder
-    alias ansible-community=$HOME/.ansible/bin/ansible-community
-    alias ansible-config=$HOME/.ansible/bin/ansible-config
-    alias ansible-console=$HOME/.ansible/bin/ansible-console
-    alias ansible-doc=$HOME/.ansible/bin/ansible-doc
-    alias ansible-galaxy=$HOME/.ansible/bin/ansible-galaxy
-    alias ansible-inventory=$HOME/.ansible/bin/ansible-inventory
-    alias ansible-playbook=$HOME/.ansible/bin/ansible-playbook
-    alias ansible-pull=$HOME/.ansible/bin/ansible-pull
-    alias ansible-test=$HOME/.ansible/bin/ansible-test
-    alias ansible-vault=$HOME/.ansible/bin/ansible-vault
+if [ -d ~/.ansible ]; then
+    alias ansible=~/.ansible/bin/ansible
+    alias ansible-builder=~/.ansible/bin/ansible-builder
+    alias ansible-community=~/.ansible/bin/ansible-community
+    alias ansible-config=~/.ansible/bin/ansible-config
+    alias ansible-console=~/.ansible/bin/ansible-console
+    alias ansible-doc=~/.ansible/bin/ansible-doc
+    alias ansible-galaxy=~/.ansible/bin/ansible-galaxy
+    alias ansible-inventory=~/.ansible/bin/ansible-inventory
+    alias ansible-playbook=~/.ansible/bin/ansible-playbook
+    alias ansible-pull=~/.ansible/bin/ansible-pull
+    alias ansible-test=~/.ansible/bin/ansible-test
+    alias ansible-vault=~/.ansible/bin/ansible-vault
 fi
+
