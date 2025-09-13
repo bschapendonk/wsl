@@ -4,10 +4,10 @@ Ansible playbook to setup my WSL
 ## Assumptions
 
 * Only works on my machine!
-* Recent Windows 11 24H2
+* Required Windows 11 24H2 or newer
 * Required WSL 2.6.1 or newer
-* Required Ubuntu 24.04
-* Requires `bash`
+* Required Ubuntu 24.04 or newer
+* Requires `bash` as the default shell
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
   * Font eg. [CaskaydiaCove](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip)
