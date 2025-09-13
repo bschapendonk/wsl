@@ -52,7 +52,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 python3 -m venv ~/.ansible
 source ~/.ansible/bin/activate
-pip install ansible argcomplete python-debian
+python3 -m pip install ansible argcomplete python-debian
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`
