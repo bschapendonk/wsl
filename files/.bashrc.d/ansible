@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 for target in $HOME/.ansible/bin/ansible*; do
+    [ -e $target ] || continue
     basename=$(basename $target)
     linkname="$HOME/.local/bin/$basename"
     if [ -L $linkname ]; then
