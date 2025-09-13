@@ -5,19 +5,3 @@ alias mc="mc --no-x11"
 if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
-
-if [ -d ~/.ansible ]; then
-    alias ansible=~/.ansible/bin/ansible
-    alias ansible-builder=~/.ansible/bin/ansible-builder
-    alias ansible-community=~/.ansible/bin/ansible-community
-    alias ansible-config=~/.ansible/bin/ansible-config
-    alias ansible-console=~/.ansible/bin/ansible-console
-    alias ansible-doc=~/.ansible/bin/ansible-doc
-    alias ansible-galaxy=~/.ansible/bin/ansible-galaxy
-    alias ansible-inventory=~/.ansible/bin/ansible-inventory
-    alias ansible-playbook=~/.ansible/bin/ansible-playbook
-    alias ansible-pull=~/.ansible/bin/ansible-pull
-    alias ansible-test=~/.ansible/bin/ansible-test
-    alias ansible-vault=~/.ansible/bin/ansible-vault
-fi
-

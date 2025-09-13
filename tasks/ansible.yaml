@@ -7,13 +7,3 @@
       callback_format_pretty=true
       result_format=yaml
     mode: 0640
-
-- ansible.builtin.pip:
-    name:
-      - ansible
-      - ansible-builder
-      - argcomplete
-      - python-debian
-    virtualenv: ~/.ansible
-    virtualenv_command: python3 -m venv
-    state: latest

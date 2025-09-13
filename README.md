@@ -5,8 +5,9 @@ Ansible playbook to setup my WSL
 
 * Only works on my machine!
 * Recent Windows 11 24H2
-* Required WSL 2.5.10 or newer
-* Required Ubuntu 24.04
+* Required WSL 2.6.1 or newer
+* Required Ubuntu 25.10 (https://cdimage.ubuntu.com/ubuntu-wsl/daily-live/pending/)
+  * `wsl --install --from-file questing-wsl-amd64.wsl`
 * Requires `bash`
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
@@ -36,7 +37,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 # install minimal required packages
-sudo apt -y install python3-debian python3-pip python3-venv
+sudo apt -y install pipx
 
 # install homebrew and activate it for the current shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -50,9 +51,10 @@ git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
-python3 -m venv ~/.ansible
-source ~/.ansible/bin/activate
-pip install ansible argcomplete python-debian
+pipx ensurepath
+source ~/.bashrc
+pipx install --include-deps ansible
+pipx inject ansible argcomplete python3-debian
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`
