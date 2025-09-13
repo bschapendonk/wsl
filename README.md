@@ -6,8 +6,8 @@ Ansible playbook to setup my WSL
 * Only works on my machine!
 * Recent Windows 11 24H2
 * Required WSL 2.6.1 or newer
-* Required Ubuntu 25.10 (https://cdimage.ubuntu.com/ubuntu-wsl/daily-live/pending/)
-  * `wsl --install --from-file questing-wsl-amd64.wsl`
+* Required Ubuntu 25.04 (https://releases.ubuntu.com/plucky/ubuntu-25.04-wsl-amd64.wsl)
+  * `wsl --install --from-file ubuntu-25.04-wsl-amd64.wsl`
 * Requires `bash`
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
@@ -54,7 +54,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 pipx ensurepath
 source ~/.bashrc
 pipx install --include-deps ansible
-pipx inject ansible argcomplete python3-debian
+pipx inject ansible argcomplete python-debian
 ```
 
 ### 3. Rename and edit `config.example.yaml` to `config.yaml`

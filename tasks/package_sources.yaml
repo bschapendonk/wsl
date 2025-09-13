@@ -12,7 +12,7 @@
   ansible.builtin.deb822_repository:
     name: docker
     uris: https://download.docker.com/linux/ubuntu
-    suites: noble
+    suites: plucky
     components:
       - stable
     signed_by: https://download.docker.com/linux/ubuntu/gpg
