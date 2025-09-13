@@ -5,7 +5,7 @@
       - ca-certificates
       - libc6
       - libgcc-s1
-      - libicu76
+      - libicu74
       - liblttng-ust1
       - libssl3
       - libstdc++6

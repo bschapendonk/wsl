@@ -41,8 +41,8 @@
     - name: Configure OpenSSH
       ansible.builtin.import_tasks: tasks/openssh.yaml
 
-    - name: Install and configure Pipx
-      ansible.builtin.import_tasks: tasks/pipx.yaml
+    # - name: Install and configure Pipx
+    #   ansible.builtin.import_tasks: tasks/pipx.yaml
 
     - name: Configure Ansible
       ansible.builtin.import_tasks: tasks/ansible.yaml
