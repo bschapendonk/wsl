@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias mc="mc --no-x11"
+alias mc="mc --nosubshell"
 
 if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
