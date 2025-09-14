@@ -16,6 +16,7 @@
       - jsonpatch
       - kubernetes
       - netaddr
+      - pip
       - proxmoxer
       - python-debian
     virtualenv: ~/.ansible
