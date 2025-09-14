@@ -5,6 +5,7 @@
     "auto": true
   },
   "version": 3,
+  "extends": "",
   "blocks": [
     {
       "alignment": "left",
