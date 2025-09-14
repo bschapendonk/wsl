@@ -1,11 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "final_space": true,
-  "version": 3,
   "upgrade": {
     "auto": true
   },
-  "console_title_template": "{{ .Shell }} [{{ .SHLVL }}] in {{ .Folder }}",
+  "version": 3,
   "blocks": [
     {
       "alignment": "left",
