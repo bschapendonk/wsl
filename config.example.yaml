@@ -16,7 +16,8 @@ apt_pkg:
   - iputils-ping
   - iputils-tracepath
   - jq
-  - pipx
+  - python3-pip
+  - python3-venv
   - mc
   - mtr-tiny
   - traceroute
@@ -46,24 +47,20 @@ homebrew_taps:
 
 homebrew_pkg:
   - azure/kubelogin/az-kubelogin
+  - cmctl
   - derailed/k9s/k9s
   - fluxcd/tap/flux
+  - gh
+  - hashicorp/tap/packer
   - hashicorp/tap/terraform
   - helm
+  - hugo
   - int128/kubelogin/kubelogin
+  - kind
   - kubectl
   - kustomize
-  - oh-my-posh
+  - kyverno
 
-pipx:
-  - name: ansible
-    deps: yes
-    inject:
-      - argcomplete
-      - python-debian
-  - name: ansible-builder
-
-# All the k3s/kc/az stuff is mainly for .bash_aliases
 # k3s:
 #   - name: k3s
 #     host: k3s.local
