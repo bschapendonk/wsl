@@ -13,6 +13,10 @@
       - ansible
       - ansible-builder
       - argcomplete
+      - jsonpatch
+      - kubernetes
+      - netaddr
+      - proxmoxer
       - python-debian
     virtualenv: ~/.ansible
     virtualenv_command: python3 -m venv
