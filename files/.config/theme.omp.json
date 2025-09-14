@@ -1,5 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "final_space": true,
+  "version": 3,
+  "upgrade": {
+    "auto": true
+  },
+  "console_title_template": "{{ .Shell }} [{{ .SHLVL }}] in {{ .Folder }}",
   "blocks": [
     {
       "alignment": "left",
@@ -159,11 +165,5 @@
       ],
       "type": "prompt"
     }
-  ],
-  "console_title_template": "{{ .Shell }} [{{ .SHLVL }}] in {{ .Folder }}",
-  "final_space": true,
-  "version": 3,
-  "upgrade": {
-    "auto": true
-  }
+  ]
 }
