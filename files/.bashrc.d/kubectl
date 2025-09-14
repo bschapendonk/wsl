@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Function to select a kubeconfig file and set the KUBECONFIG environment variable
 kcc() {
