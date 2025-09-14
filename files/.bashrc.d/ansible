@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 for target in $HOME/.ansible/bin/ansible*; do
     [ -e $target ] || continue

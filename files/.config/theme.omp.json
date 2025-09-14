@@ -162,5 +162,8 @@
   ],
   "console_title_template": "{{ .Shell }} [{{ .SHLVL }}] in {{ .Folder }}",
   "final_space": true,
-  "version": 3
+  "version": 3,
+  "upgrade": {
+    "auto": true
+  }
 }

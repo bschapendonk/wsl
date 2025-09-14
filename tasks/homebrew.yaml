@@ -46,13 +46,6 @@
       {{ (homebrew_pkg | default([])) + ['oh-my-posh'] }}
     state: present
 
-- name: Configure oh-my-posh for bash
-  ansible.builtin.copy:
-    content: |-
-      eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
-    dest: ~/.bashrc.d/omp
-    mode: 0640
-
 - name: Check Homebrew completions state
   ansible.builtin.command: brew completions state
   changed_when: false

@@ -32,3 +32,8 @@
     path: ~/.kube
     state: directory
     mode: 0700
+
+- name: Install oh-my-posh
+  ansible.builtin.command: curl -s https://ohmyposh.dev/install.sh | bash -s
+  args:
+    creates: ~/.local/bin/oh-my-posh

@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+if command -v oh-my-posh >/dev/null 2>&1 && [ -f ~/.config/theme.omp.json ]; then
+    eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+fi
