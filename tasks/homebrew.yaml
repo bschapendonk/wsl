@@ -43,7 +43,7 @@
 - name: Install Homebrew packages
   community.general.homebrew:
     name: >-
-      {{ (homebrew_pkg | default([])) + ['oh-my-posh'] }}
+      {{ (homebrew_pkg | default([])) }}
     state: present
 
 - name: Check Homebrew completions state
