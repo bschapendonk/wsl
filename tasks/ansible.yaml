@@ -6,6 +6,9 @@
       [defaults]
       callback_format_pretty=true
       result_format=yaml
+      {% if ansible_inventory is defined and ansible_inventory | length > 0 %}
+      inventory=['{{ ansible_inventory | join("','")  }}']
+      {% endif %}
     mode: 0640
 
 - ansible.builtin.pip:
