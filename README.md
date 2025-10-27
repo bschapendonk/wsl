@@ -34,7 +34,7 @@ wsl --update
 ```bash
 # as long as ansible become is broken, add you user to the sudoers.d with NOPASSWD
 # https://github.com/ansible/ansible/issues/85837
-sudo sh -c "echo \"$USER  ALL=(ALL)       NOPASSWD: ALL\" >/etc/sudoers.d/$USER"
+# sudo sh -c "echo \"$USER  ALL=(ALL)       NOPASSWD: ALL\" >/etc/sudoers.d/$USER"
 
 # update everything
 sudo apt -y update
