@@ -52,6 +52,7 @@ brew completions link
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
 
 # exports
+export ANSIBLE_BECOME_EXE=sudo.ws
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
