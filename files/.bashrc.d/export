@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export ANSIBLE_BECOME_EXE=sudo.ws
-
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 

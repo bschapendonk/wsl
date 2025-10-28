@@ -6,6 +6,7 @@
     - name: ansible_become_pass
       prompt: Sudo password
       private: true
+  become_exe: sudo.ws
   tasks:
     - name: Copy configuration files to home directory
       ansible.builtin.copy:
