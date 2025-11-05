@@ -1,4 +1,4 @@
-shortCut: w
+shortCut: Alt-S
 description: WHell (WHiptail SHell)
 scopes:
   - container
