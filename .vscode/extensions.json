@@ -10,7 +10,6 @@
 		"ms-vscode-remote.remote-wsl",
 		"ms-vscode.PowerShell",
 		"redhat.vscode-xml",
-		"redhat.vscode-yaml",
-		"VisualStudioExptTeam.vscodeintellicode"
+		"redhat.vscode-yaml"
 	]
 }
