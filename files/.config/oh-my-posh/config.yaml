@@ -3,6 +3,9 @@
 final_space: true
 upgrade:
   auto: true
+  interval: 24h
+  notice: false
+  source: cdn
 version: 3
 extends: ~/.config/oh-my-posh/themes/cloud-native-azure.omp.json
 blocks: []
