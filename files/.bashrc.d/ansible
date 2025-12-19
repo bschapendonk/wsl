@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euxo pipefail
 
 for target in $HOME/.ansible/bin/ansible*; do
     [ -e $target ] || continue
