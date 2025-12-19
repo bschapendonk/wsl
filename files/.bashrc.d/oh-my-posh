@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 
 if [ -f ~/.local/bin/oh-my-posh ] && [ -f ~/.config/oh-my-posh/config.yaml ]; then
     eval "$(~/.local/bin/oh-my-posh init bash --config ~/.config/oh-my-posh/config.yaml)"

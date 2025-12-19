@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 
 # Function to select a kubeconfig file and set the KUBECONFIG environment variable
 kcc() {
