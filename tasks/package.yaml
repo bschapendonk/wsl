@@ -1,10 +1,11 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks
 - name: Update and Upgrade System Packages
   ansible.builtin.apt:
-    update_cache: true
-    upgrade: true
     autoclean: true
     autoremove: true
+    cache_valid_time: 3600
+    upgrade: true
 
 - name: Install Specified Packages
   ansible.builtin.apt:
