@@ -8,6 +8,7 @@
     components:
       - main
     signed_by: https://packages.microsoft.com/keys/microsoft.asc
+  register: azure_cli_repo
 
 - name: Add Docker Repository for Ubuntu
   ansible.builtin.deb822_repository:
@@ -18,3 +19,4 @@
       - stable
     signed_by: https://download.docker.com/linux/ubuntu/gpg
   when: install_docker
+  register: docker_repo
