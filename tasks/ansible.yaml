@@ -20,6 +20,7 @@
       - jsonpatch
       - kubernetes
       - netaddr
+      - passlib
       - pip
       - proxmoxer
       - python-debian
