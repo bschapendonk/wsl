@@ -4,8 +4,7 @@
   ansible.builtin.apt:
     autoclean: true
     autoremove: true
-    cache_valid_time: 3600
-    update_cache: "{{ azure_cli_repo.changed or (install_docker and docker_repo.changed) }}"
+    update_cache: true
     upgrade: true
 
 - name: Install Specified Packages
