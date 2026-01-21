@@ -15,6 +15,21 @@
     value: >-
       true
 
+- name: Set GPG format to SSH
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: gpg.format
+    value: ssh
+
+- name: Enable GPG signing for commits
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: commit.gpgsign
+    value: >-
+      true
+
 - name: Ensure personal directory exists
   ansible.builtin.file:
     path: ~/personal
@@ -57,6 +72,14 @@
     value: >-
       {{ git_config_personal_email }}
 
+- name: Set personal Git signing key
+  community.general.git_config:
+    scope: file
+    file: ~/personal/.gitconfig
+    name: user.signingkey
+    value: >-
+      {{ git_ssh_signing_key }}
+
 - name: Set work Git user name
   community.general.git_config:
     scope: file
@@ -72,6 +95,15 @@
     name: user.email
     value: >-
       {{ git_config_work_email }}
+
+- name: Set work Git signing key
+  community.general.git_config:
+    scope: file
+    file: ~/work/.gitconfig
+    name: user.signingkey
+    value: >-
+      {{ git_ssh_signing_key }}
+
 
 - name: Clone Git repositories
   ansible.builtin.git:
