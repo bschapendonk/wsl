@@ -8,16 +8,6 @@
       - docker-ce
       - docker-ce-cli
       - docker-compose-plugin
-
-- ansible.builtin.copy:
-    content: |
-      {
-        "fixed-cidr-v6": "2001:db8:1::/64",
-        "ip6tables": true,
-        "ipv6": true
-      }
-    dest: /etc/docker/daemon.json
-    mode: 0644
     
 - name: Start and Enable Docker Service
   ansible.builtin.systemd:
