@@ -51,6 +51,7 @@ homebrew_pkg:
   - derailed/k9s/k9s
   - fluxcd/tap/flux
   - gh
+  - gickup
   - hashicorp/tap/packer
   - hashicorp/tap/terraform
   - helm
@@ -60,6 +61,9 @@ homebrew_pkg:
   - kubectl
   - kustomize
   - kyverno
+
+ansible_inventory:
+  - ~/personal/automation/inventory
 
 # k3s:
 #   - name: k3s
