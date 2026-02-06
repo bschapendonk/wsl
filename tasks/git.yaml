@@ -1,5 +1,28 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks
+- name: Enable Git rerere
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: rerere.enabled
+    value: >-
+      true
+
+- name: Set Git pull fast-forward behavior to only
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: pull.ff
+    value: only
+
+# - name: Set Git pull rebase behavior to true
+#   community.general.git_config:
+#     scope: file
+#     file: ~/.gitconfig
+#     name: pull.rebase
+#     value: >-
+#       true
+
 - name: Configure Git credential helper
   community.general.git_config:
     scope: file
@@ -103,7 +126,6 @@
     name: user.signingkey
     value: >-
       {{ git_ssh_signing_key }}
-
 
 - name: Clone Git repositories
   ansible.builtin.git:
