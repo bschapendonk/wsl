@@ -44,6 +44,7 @@
     file: ~/.gitconfig
     name: gpg.format
     value: ssh
+  when: git_ssh_signing_key is defined
 
 - name: Enable GPG signing for commits
   community.general.git_config:
@@ -52,6 +53,7 @@
     name: commit.gpgsign
     value: >-
       true
+  when: git_ssh_signing_key is defined
 
 - name: Ensure personal directory exists
   ansible.builtin.file:

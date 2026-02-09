@@ -4,6 +4,8 @@ git_config_personal_email: user@example.com
 git_config_work_name: User
 git_config_work_email: user@example.com
 
+# git_ssh_signing_key: ~/.ssh/id_git_signing
+
 apt_pkg:
   # misc
   - bash-completion
@@ -32,11 +34,11 @@ apt_pkg:
 
 install_docker: yes
 
-dotnet:
-  - channel: lts
-  - channel: 9.0
-  # - channel: 10.0
-  #   quality: preview
+# dotnet:
+#   - channel: lts
+#   - channel: 9.0
+#   - channel: 10.0
+#     quality: preview
 
 homebrew_taps:
   - azure/kubelogin
