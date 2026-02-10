@@ -35,7 +35,7 @@
     - name: Install and configure Docker
       ansible.builtin.import_tasks: tasks/docker.yaml
       become: true
-      when: install_docker
+      when: install_docker | default(false)
 
     - name: Configure Git
       ansible.builtin.import_tasks: tasks/git.yaml
