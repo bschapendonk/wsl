@@ -32,7 +32,7 @@ apt_pkg:
   # tex
   # - texlive-full
 
-install_docker: yes
+install_docker: true
 
 # dotnet:
 #   - channel: lts
@@ -71,6 +71,7 @@ ansible_inventory:
 #   - name: k3s
 #     host: k3s.local
 
+# ssh_harden: true
 # ssh_hosts:
 #   - host: test.example.com
 #   - host: test2
