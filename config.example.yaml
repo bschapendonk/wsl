@@ -71,8 +71,9 @@ ansible_inventory:
 #   - name: k3s
 #     host: k3s.local
 
-# ssh_harden: true
-# ssh_hosts:
+ssh_hosts:
+  - host: ssh.dev.azure.com
+    kexalgorithms: +ecdh-sha2-nistp521,diffie-hellman-group18-sha512
 #   - host: test.example.com
 #   - host: test2
 #     hostname: test2.example.com
