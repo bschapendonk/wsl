@@ -45,7 +45,6 @@ homebrew_taps:
   - derailed/k9s
   - fluxcd/tap
   - hashicorp/tap
-  - int128/kubelogin
 
 homebrew_pkg:
   - azure/kubelogin/az-kubelogin
@@ -58,9 +57,9 @@ homebrew_pkg:
   - hashicorp/tap/terraform
   - helm
   - hugo
-  - int128/kubelogin/kubelogin
   - kind
   - kubectl
+  - kubelogin
   - kustomize
   - kyverno
 
