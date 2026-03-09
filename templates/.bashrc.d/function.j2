@@ -87,10 +87,14 @@ ccc() {
         az logout
     fi
 
-    # Clear az-kubelogin cache if available
-    if command -v az-kubelogin &>/dev/null; then
-        az-kubelogin remove-cache-dir
-        az-kubelogin remove-cache-dir --cache-dir /mnt/c/Users/$USER/.kube/cache/kubelogin
+    # Clear kubectl-oidc_login clean if available
+    if command -v kubectl-oidc_login &>/dev/null; then
+       kubectl-oidc_login clean
+    fi
+
+    # Clear kubelogin cache if available
+    if command -v kubelogin &>/dev/null; then
+        kubelogin remove-cache-dir
     fi
 
     # Logout from all Docker registries if Docker is available
