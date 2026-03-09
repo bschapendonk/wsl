@@ -5,3 +5,7 @@ alias mc="mc --nosubshell"
 if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
+
+if command -v az-kubelogin &>/dev/null; then
+    alias kubelogin=az-kubelogin
+fi
