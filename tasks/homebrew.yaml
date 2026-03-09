@@ -15,6 +15,7 @@
 - name: Configure Homebrew in ~/.bashrc
   ansible.builtin.copy:
     content: |-
+      #!/usr/bin/env bash
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
       if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
@@ -25,6 +26,10 @@
         do
           [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
         done
+      fi
+
+      if command -v az-kubelogin &>/dev/null; then
+        alias kubelogin=az-kubelogin
       fi
     dest: ~/.bashrc.d/homebrew
     mode: 0640
