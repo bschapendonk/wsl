@@ -27,10 +27,6 @@
           [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
         done
       fi
-
-      if command -v az-kubelogin &>/dev/null; then
-        alias kubelogin=az-kubelogin
-      fi
     dest: ~/.bashrc.d/homebrew
     mode: 0640
 
@@ -60,3 +56,11 @@
 - name: Link Homebrew completions
   ansible.builtin.command: brew completions link
   when: result.stdout != "Completions are linked."
+
+- name: Install kubelogin (azure doesn't maintain their homebrew, and int128 isn't renamed yet)
+  ansible.builtin.unarchive:
+    src: "{{ lookup('url', 'https://api.github.com/repos/Azure/kubelogin/releases/latest', split_lines=false) | regex_search('browser_download_url.*(https://(.*?)linux-amd64.zip)', '\\1') | first }}"
+    dest: ~/.local/bin
+    remote_src: yes
+    extra_opts:
+      - -j

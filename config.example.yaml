@@ -41,13 +41,11 @@ install_docker: true
 #     quality: preview
 
 homebrew_taps:
-  - azure/kubelogin
   - derailed/k9s
   - fluxcd/tap
   - hashicorp/tap
 
 homebrew_pkg:
-  - azure/kubelogin/az-kubelogin
   - cmctl
   - derailed/k9s/k9s
   - fluxcd/tap/flux
