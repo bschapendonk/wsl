@@ -30,6 +30,13 @@
     name: credential.helper
     value: /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe
 
+- name: Enable Azure DevOps credential type
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: credential.azreposCredentialType
+    value: oauth
+
 - name: Enable HTTP path for Azure DevOps credentials
   community.general.git_config:
     scope: file
