@@ -7,7 +7,7 @@ Ansible playbook to setup my WSL
 * Required Windows 11 25H2 or newer
 * Required WSL 2.6.3 or newer
 * Required Ubuntu 26.04 or newer
-  * Download https://cdimage.ubuntu.com/ubuntu-wsl/daily-live/current/resolute-wsl-amd64.wsl
+  * Download https://releases.ubuntu.com/resolute/ubuntu-26.04-wsl-amd64.wsl
 * Requires `bash` as the default shell
 * Force installes [Oh My Posh](https://ohmyposh.dev/), which requires
   * [Windows Terminal](https://github.com/microsoft/terminal) 
