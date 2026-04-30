@@ -18,3 +18,9 @@
       - stable
     signed_by: https://download.docker.com/linux/ubuntu/gpg
   when: install_docker
+
+- name: Enable AMD64v3 Architecture Variant
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/99enable-amd64v3
+    content: |
+      APT::Architecture-Variants "amd64v3";
