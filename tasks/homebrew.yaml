@@ -34,6 +34,7 @@
   community.general.homebrew:
     update_homebrew: true
     upgrade_all: true
+    state: latest
 
 - name: Add Homebrew taps
   community.general.homebrew_tap:
