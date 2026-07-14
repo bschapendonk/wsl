@@ -45,6 +45,14 @@
     value: >-
       true
 
+- name: Enable HTTP path for GitHub credentials
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: credential.https://github.com.useHttpPath
+    value: >-
+      true
+
 - name: Set GPG format to SSH
   community.general.git_config:
     scope: file
