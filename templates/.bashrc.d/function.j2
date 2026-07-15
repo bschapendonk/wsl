@@ -112,7 +112,7 @@ if command -v oc >/dev/null 2>&1; then
     oc() {
         if [[ "$1" == "login" ]]; then
             shift
-            command oc login --kubeconfig="$HOME/.kube/oc "$@"
+            command oc login --kubeconfig="$HOME/.kube/oc" "$@"
         else
             command oc "$@"
         fi
