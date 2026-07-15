@@ -108,8 +108,13 @@ ccc() {
     fi
 }
 
-if command -v  oc &>/dev/null; then
+if command -v oc >/dev/null 2>&1; then
     oc() {
-        KUBECONFIG="$HOME/.kube/ocp" command oc "$@"
+        if [[ "$1" == "login" ]]; then
+            shift
+            command oc login --kubeconfig="$HOME/.kube/oc "$@"
+        else
+            command oc "$@"
+        fi
     }
 fi
