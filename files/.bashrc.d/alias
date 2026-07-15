@@ -7,5 +7,5 @@ if command -v code-insiders &>/dev/null; then
 fi
 
 if command -v oc &>/dev/null; then
-    alias oc="oc --kubeconfig=~/.kube/ocp"
+    alias oc="KUBECONFIG=$HOME/.kube/ocp; oc"
 fi
