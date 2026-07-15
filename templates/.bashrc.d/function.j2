@@ -101,4 +101,9 @@ ccc() {
     if command -v docker &>/dev/null; then
         docker logout all
     fi
+
+    # Logout from all OpenShift clusters if oc is available
+    if command -v oc &>/dev/null; then
+        oc logout --all
+    fi
 }

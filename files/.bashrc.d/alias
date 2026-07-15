@@ -5,3 +5,7 @@ alias mc="mc --nosubshell"
 if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
 fi
+
+if command -v oc &>/dev/null; then
+    alias oc="oc --kubeconfig=$HOME/.kube/ocp"
+fi
