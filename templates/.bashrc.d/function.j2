@@ -107,3 +107,9 @@ ccc() {
         oc logout --all
     fi
 }
+
+if command -v  oc &>/dev/null; then
+    oc() {
+        KUBECONFIG="$HOME/.kube/ocp" command oc "$@"
+    }
+fi
