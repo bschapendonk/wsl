@@ -1,5 +1,13 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks
+- name: Set Git default branch to main
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: init.defaultBranch
+    value: >-
+      main
+
 - name: Enable Git rerere
   community.general.git_config:
     scope: file
