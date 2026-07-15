@@ -103,12 +103,12 @@ ccc() {
     fi
 
     # Logout from all OpenShift clusters if oc is available
-    if command -v oc &>/dev/null; then
-        oc logout --all
+    if [[ -x "$HOME/.local/bin/oc" ]]; then
+        oc logout
     fi
 }
 
-if command -v oc >/dev/null 2>&1; then
+if [[ -x "$HOME/.local/bin/oc" ]]; then
     oc() {
         if [[ "$1" == "login" ]]; then
             shift
