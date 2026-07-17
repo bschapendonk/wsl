@@ -113,6 +113,9 @@ if [[ -x "$HOME/.local/bin/oc" ]]; then
         if [[ "$1" == "login" ]]; then
             shift
             command oc login --kubeconfig="$HOME/.kube/oc" "$@"
+        elif [[ "$1" == "logout" ]]; then
+            shift
+            command oc logout --kubeconfig="$HOME/.kube/oc" "$@"
         else
             command oc "$@"
         fi
