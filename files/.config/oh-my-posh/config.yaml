@@ -1,11 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 ---
 final_space: true
+shell_integration: true
+enable_cursor_positioning: true
 upgrade:
-  auto: true
-  interval: 24h
   notice: false
-  source: cdn
-version: 3
+  auto: true
+  interval: 4h
+  source: github
+terminal_features:
+  progress:
+    - Windows Terminal
+version: 4
 extends: ~/.config/oh-my-posh/themes/cloud-native-azure.omp.json
 blocks: []
