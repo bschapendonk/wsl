@@ -4,8 +4,8 @@ final_space: true
 shell_integration: true
 enable_cursor_positioning: true
 upgrade:
-  notice: false
-  auto: true
+  notice: true
+  auto: false
   interval: 4h
   source: github
 terminal_features:
