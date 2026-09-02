@@ -38,29 +38,6 @@
     name: credential.helper
     value: /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe
 
-- name: Enable Azure DevOps credential type
-  community.general.git_config:
-    scope: file
-    file: ~/.gitconfig
-    name: credential.azreposCredentialType
-    value: oauth
-
-- name: Enable HTTP path for Azure DevOps credentials
-  community.general.git_config:
-    scope: file
-    file: ~/.gitconfig
-    name: credential.https://dev.azure.com.useHttpPath
-    value: >-
-      true
-
-- name: Enable HTTP path for GitHub credentials
-  community.general.git_config:
-    scope: file
-    file: ~/.gitconfig
-    name: credential.https://github.com.useHttpPath
-    value: >-
-      true
-
 - name: Set GPG format to SSH
   community.general.git_config:
     scope: file
@@ -151,6 +128,29 @@
     name: user.signingkey
     value: >-
       {{ git_ssh_signing_key }}
+
+- name: Enable Azure DevOps credential type
+  community.general.git_config:
+    scope: file
+    file: ~/work/.gitconfig
+    name: credential.azreposCredentialType
+    value: oauth
+
+- name: Enable HTTP path for Azure DevOps credentials
+  community.general.git_config:
+    scope: file
+    file: ~/work/.gitconfig
+    name: credential.https://dev.azure.com.useHttpPath
+    value: >-
+      true
+
+- name: Enable HTTP path for GitHub credentials
+  community.general.git_config:
+    scope: file
+    file: ~/work/.gitconfig
+    name: credential.https://github.com.useHttpPath
+    value: >-
+      true
 
 - name: Clone Git repositories
   ansible.builtin.git:
