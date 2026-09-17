@@ -6,6 +6,7 @@ cleanup() { rm -f "$tmpfile"; }
 trap cleanup EXIT
 
 # examples
+# just run oc-dl to get the latest, or specify a version with OC_VERSION
 # OC_VERSION=stable oc-dl
 # OC_VERSION=stable-4.20 oc-dl
 # OC_VERSION=latest oc-dl
