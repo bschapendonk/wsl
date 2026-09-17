@@ -6,11 +6,11 @@ cleanup() { rm -f "$tmpfile"; }
 trap cleanup EXIT
 
 # examples
-# OC_VERSION=stable
-# OC_VERSION=stable-4.20
-# OC_VERSION=latest
-# OC_VERSION=latest-4.20
-# OC_VERSION=4.20.36
+# OC_VERSION=stable oc-dl
+# OC_VERSION=stable-4.20 oc-dl
+# OC_VERSION=latest oc-dl
+# OC_VERSION=latest-4.20 oc-dl
+# OC_VERSION=4.20.36 oc-dl
 
 oc_version="${OC_VERSION:-stable}"
 download_url=
