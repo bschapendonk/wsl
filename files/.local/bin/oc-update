@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eux
+
+tmpfile=$(mktemp)
+cleanup() { rm -f "$tmpfile"; }
+trap cleanup EXIT
+
+curl -L -o "$tmpfile" https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
+tar -xzf "$tmpfile" -C "$(dirname "$tmpfile")"
+mv "$(dirname "$tmpfile")/oc" "$HOME/.local/bin/oc"
