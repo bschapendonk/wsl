@@ -5,6 +5,15 @@ tmpfile=$(mktemp)
 cleanup() { rm -f "$tmpfile"; }
 trap cleanup EXIT
 
-curl -L -o "$tmpfile" https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
+# examples
+# OC_VERSION=stable
+# OC_VERSION=stable-4.20
+# OC_VERSION=latest
+# OC_VERSION=latest-4.20
+# OC_VERSION=4.20.36
+
+oc_version="${OC_VERSION:-stable}"
+download_url=
+curl -L -o "$tmpfile" "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OC_VERSION:-stable}/openshift-client-linux.tar.gz"
 tar -xzf "$tmpfile" -C "$(dirname "$tmpfile")"
 mv "$(dirname "$tmpfile")/oc" "$HOME/.local/bin/oc"
