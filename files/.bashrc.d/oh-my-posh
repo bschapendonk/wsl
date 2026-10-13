@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -f $HOME/.local/bin/oh-my-posh ] && [ -f $HOME/.config/oh-my-posh/config.yaml ]; then
-    if [ -d "$HOME/.local/bin" ] ; then
-        PATH="$HOME/.local/bin:$PATH"
-    fi
-
-    eval "$(oh-my-posh init bash --config $HOME/.config/oh-my-posh/config.yaml)"
-fi

@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks
+- name: Install oh-my-posh
+  ansible.builtin.shell: curl -s https://ohmyposh.dev/install.sh | bash -s
+  args:
+    creates: ~/.local/bin/oh-my-posh
+
+- name: Configure oh-my-posh in .profile
+  ansible.builtin.blockinfile:
+    path: ~/.profile
+    mode: 0640
+    marker: >-
+      # {mark} OH-MY-POSH
+    block: |
+      eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.yaml)"
