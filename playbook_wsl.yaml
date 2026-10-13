@@ -13,9 +13,12 @@
       ansible.builtin.copy:
         src: files/
         dest: ~/
-
-    - name: Execute Bash configuration tasks
+    
+    - name: Configure Bash environment
       ansible.builtin.import_tasks: tasks/bash.yaml
+
+    - name: Configure user profile
+      ansible.builtin.import_tasks: tasks/profile.yaml
 
     - name: Configure package sources
       ansible.builtin.import_tasks: tasks/package_sources.yaml
