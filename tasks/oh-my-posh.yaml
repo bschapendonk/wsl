@@ -10,6 +10,6 @@
     path: ~/.profile
     mode: 0640
     marker: >-
-      # {mark} OH-MY-POSH
+      # {mark} Oh My Posh
     block: |
       eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.yaml)"
