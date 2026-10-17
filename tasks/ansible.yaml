@@ -17,6 +17,7 @@
       - ansible
       - ansible-builder
       - argcomplete
+      - github3.py
       - jsonpatch
       - kubernetes
       - netaddr
