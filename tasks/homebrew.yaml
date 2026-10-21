@@ -40,6 +40,7 @@
   community.general.homebrew_tap:
     name: >-
       {{ item }}
+    trust: true
   loop: >-
     {{ homebrew_taps | default([]) }}
 
