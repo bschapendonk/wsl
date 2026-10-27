@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+function testssl() {
+    docker run --rm ghcr.io/testssl/testssl.sh "$@"
+}
