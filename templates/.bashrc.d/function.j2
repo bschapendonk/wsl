@@ -102,6 +102,10 @@ ccc() {
         docker logout all
     fi
 
+    if [[ -x "$HOME/.docker" ]]; then
+        rm -rf $HOME/.docker
+    fi
+
     # Logout from all OpenShift clusters if oc is available
     if [[ -x "$HOME/.local/bin/oc" ]]; then
         oc logout
