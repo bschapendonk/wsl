@@ -97,15 +97,6 @@ ccc() {
         kubelogin remove-cache-dir
     fi
 
-    # Logout from all Docker registries if Docker is available
-    if command -v docker &>/dev/null; then
-        docker logout all
-    fi
-
-    if [[ -x "$HOME/.docker" ]]; then
-        rm -rf $HOME/.docker
-    fi
-
     # Logout from all OpenShift clusters if oc is available
     if [[ -x "$HOME/.local/bin/oc" ]]; then
         oc logout
