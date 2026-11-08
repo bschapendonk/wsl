@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 alias mc="mc --nosubshell"
+alias kubelogin="az-kubelogin"
 
 if command -v code-insiders &>/dev/null; then
     alias code=code-insiders
