@@ -13,7 +13,7 @@ trap cleanup EXIT
 # OC_VERSION=latest-4.20 oc-dl
 # OC_VERSION=4.20.36 oc-dl
 
-oc_version="${OC_VERSION:-stable}"
+oc_version="${OC_VERSION:-latest}"
 download_url=
 curl -L -o "$tmpfile" "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OC_VERSION:-stable}/openshift-client-linux.tar.gz"
 tar -xzf "$tmpfile" -C "$(dirname "$tmpfile")"
