@@ -52,7 +52,7 @@
     dest: ~/.local/share/bash-completion/completions/dotnet
 
 - name: Install PowerShell global tool
-  ansible.builtin.command: dotnet tool update --global powershell --version 7.6
+  ansible.builtin.command: dotnet tool update --global powershell --version 7.6.*
 
 - name: Install Azure Artifacts Credential Provider
   ansible.builtin.shell: >-
